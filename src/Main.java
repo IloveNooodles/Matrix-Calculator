@@ -63,8 +63,8 @@ public class Main{
   public static void menuDeterminan() {
     System.out.println("");
     System.out.println("###### Pilih metode yang ingin digunakan ######");
-    System.out.println("1. Metode Elimnasi Gauss");
-    System.out.println("2. Metode ekspansi kofaktor");
+    System.out.println("1. Metode Eliminasi Gauss");
+    System.out.println("2. Metode Ekspansi Kofaktor");
     System.out.println("3. Metode Sarrus");
     System.out.println("4. Keluar");
     System.out.print("Masukan pilihan: ");
