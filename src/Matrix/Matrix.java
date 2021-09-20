@@ -5,16 +5,27 @@ import java.util.Scanner;
 public class Matrix {
   private int row, col;
   private Double mtxr[][];
-
+  private Scanner sc = new Scanner(System.in);
   // KONSTRUKTOR
   public Matrix(){
     this.row = 0;
     this.col = 0;
   }
+
   public Matrix(int row, int col){
     this.row = row;
     this.col = col;
     this.mtxr = new Double [row][col];
+  }
+
+  public Matrix(int row, int col, double c){
+    this.row = row;
+    this.col = col;
+    for(int i = 0; i < this.row; i++){
+      for(int j = 0; j < this.col; j++){
+        this.mtxr[i][j] = c;
+      }
+    }
   }
 
   // GETTER DAN SETTER
@@ -24,6 +35,10 @@ public class Matrix {
 
   public int getCol(){
     return this.col;
+  }
+
+  public double getElmt(int row, int col){
+    return this.mtxr[row][col];
   }
 
   public void setRow(int row){
@@ -40,14 +55,21 @@ public class Matrix {
 
   //OPERASI
   public void createMatrix(){
-    Scanner sc = new Scanner(System.in);
     for(int i = 0; i < this.row; i++){
       for(int j = 0; j < this.col; j++){
         double d = sc.nextDouble();
         this.mtxr[i][j] = d;
       }
     }
-    sc.close();
+  }
+
+  public void createIdentityMatrix(){
+    for(int i = 0; i < this.row; i++){
+      for(int j = 0; j < this.col; j++){
+        if(i == j)setElmt(i, j, 1);
+        else setElmt(i, j, 0);
+      }
+    }
   }
 
   public void displayMatrix(){
@@ -58,5 +80,41 @@ public class Matrix {
       }
       System.out.println("");
     }
+  }
+
+  public void copyMatrix(Matrix a){
+    this.row = a.getRow();
+    this.col = a.getCol();
+    this.mtxr = a.mtxr;
+  }
+
+  public double getDiagonalElmt(int idx){
+    return this.mtxr[idx][idx];
+  }
+
+  public boolean isSquare(){
+    return (this.getRow() == this.getCol());
+  }
+
+  public boolean isIdentity(){
+    boolean identity = this.isSquare();
+    if(identity){
+      for(int i = 0; i < this.row; i++){
+        for(int j = 0; j < this.col; j++){
+          if(i == j){
+            if(this.getElmt(i, j) != 1){
+              identity = false;
+              break;
+            }
+          }else{
+            if(this.getElmt(i, j) != 0){
+              identity = false;
+              break;
+            }
+          }
+        }
+      }
+    }
+    return identity;
   }
 }
