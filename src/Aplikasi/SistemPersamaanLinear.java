@@ -44,10 +44,6 @@ public class SistemPersamaanLinear {
             Operation.rowTimesK(n, 1 / n.getElmt(row, j), row);
 
             row++;
-
-            System.out.println();
-            n.displayMatrix();
-            System.out.println();
         }
 
         return n;
