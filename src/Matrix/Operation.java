@@ -1,5 +1,7 @@
 package Matrix;
 
+import Aplikasi.Determinan;
+
 public class Operation {
 
   public static Matrix addMatrix(Matrix a, Matrix b){
@@ -82,5 +84,4 @@ public class Operation {
       a.setElmt(row2, i, elmt);
     }
   }
-
 }
