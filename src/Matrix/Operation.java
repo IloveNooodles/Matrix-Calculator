@@ -3,9 +3,9 @@ package Matrix;
 public class Operation {
 
   public static Matrix addMatrix(Matrix a, Matrix b){
-    Matrix c = new Matrix(a.getRow(), a.getRow());
+    Matrix c = new Matrix(a.getRow(), a.getCol());
     for(int i = 0; i < a.getRow(); i++){
-      for(int j = 0; j < a.getRow(); j++){
+      for(int j = 0; j < a.getCol(); j++){
         c.setElmt(i, j, (a.getElmt(i, j) + b.getElmt(i, j)));
       }
     }
@@ -13,9 +13,9 @@ public class Operation {
   }
   
   public static Matrix subtractMatrix(Matrix a, Matrix b){
-    Matrix c = new Matrix(a.getRow(), a.getRow());
+    Matrix c = new Matrix(a.getRow(), a.getCol());
     for(int i = 0; i < a.getRow(); i++){
-      for(int j = 0; j < a.getRow(); j++){
+      for(int j = 0; j < a.getCol(); j++){
         c.setElmt(i, j, (a.getElmt(i, j) - b.getElmt(i, j)));
       }
     }
@@ -31,11 +31,10 @@ public class Operation {
   }
 
   public static Matrix multMatrix(Matrix a, Matrix b){
-    Matrix c = new Matrix(a.getCol(), a.getRow());
+    Matrix c = new Matrix(a.getRow(), b.getCol());
     for(int i = 0; i < a.getRow(); i++){
       for(int j = 0; j < b.getCol(); j++){
         double elmt = Operation.timesRowCol(a, b, i, j);
-        System.out.println(elmt);
         c.setElmt(i, j, elmt);
       }
     }
