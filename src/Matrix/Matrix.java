@@ -1,5 +1,6 @@
 package Matrix;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Matrix {
@@ -82,10 +83,14 @@ public class Matrix {
     }
   }
 
-  public void copyMatrix(Matrix a){
-    this.row = a.getRow();
-    this.col = a.getCol();
-    this.mtxr = a.mtxr;
+  public Matrix copyMatrix(Matrix a){
+    Matrix result = new Matrix(a.getRow(), a.getCol());
+    for (int i=0;i<a.getRow();i++){
+      for (int j=0;j<a.getCol();j++){
+        result.mtxr[i][j] = a.mtxr[i][j];
+      }
+    }
+    return result;
   }
 
   public double getDiagonalElmt(int idx){

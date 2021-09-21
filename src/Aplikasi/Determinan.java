@@ -1,6 +1,9 @@
 package Aplikasi;
 
+import java.lang.Math;
+
 import Matrix.Matrix;
+import Matrix.Operation;
 
 public class Determinan {
     public static double kofaktor(Matrix m, int a, int b) {
@@ -56,5 +59,30 @@ public class Determinan {
         }
 
         return hasil;
+    }
+    public static double determinanOBE(Matrix m){
+        Matrix n = new Matrix();
+        n = n.copyMatrix(m);
+        double det = 1;
+        for (int i=0;i<n.getCol();i++){
+            int max = i;
+            for (int j=i+1;j<n.getRow();j++){
+                if (Math.abs(n.getElmt(j, i)) > Math.abs(n.getElmt(max, i))){
+                    max = j;
+                }
+            }
+            if (Math.abs(n.getElmt(max, i))==0){
+                return 0;
+            }
+            Operation.swapRow(n, i, max);
+            if (i!=max){
+                det *= -1;
+            }
+            det *= n.getElmt(i, i);
+            for (int k=i+1;k<n.getRow();k++){
+                Operation.rowReduction(n, i, k, i);
+            }
+        }
+        return det;
     }
 }

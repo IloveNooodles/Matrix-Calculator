@@ -1,21 +1,24 @@
 import java.util.Scanner;
+
+import Aplikasi.Determinan;
 import Matrix.*;
 
 public class Main{
   public static void main(String[] args) {
-    Matrix a = new Matrix(3, 3);
+    Matrix a = new Matrix(2, 2);
     // Matrix b = new Matrix(2, 2);
     a.createMatrix();
     // b.createIdentityMatrix();
     // System.out.println(a.isIdentity());
     // System.out.println(b.isIdentity());
-    Operation.rowReduction(a, 0, 1);
-    Operation.rowReduction(a, 0, 2);
-    a.displayMatrix();
-    Operation.rowReduction(a, 1, 2);
-    Operation.rowTimesK(a, 1/a.getElmt(0, 0), 0);
-    Operation.rowTimesK(a, 1/a.getElmt(1, 1), 1);
-    Operation.rowTimesK(a, 1/a.getElmt(2, 2), 2);
+    // Operation.rowReduction(a, 0, 1);
+    // Operation.rowReduction(a, 0, 2);
+    double x = Determinan.determinanOBE(a);
+    System.out.println(x);
+    //Operation.rowReduction(a, 1, 2);
+    //Operation.rowTimesK(a, 1/a.getElmt(0, 0), 0);
+    //Operation.rowTimesK(a, 1/a.getElmt(1, 1), 1);
+    //Operation.rowTimesK(a, 1/a.getElmt(2, 2), 2);
     // Operation.rowReduction(a, 1, 2);
     a.displayMatrix();
   }

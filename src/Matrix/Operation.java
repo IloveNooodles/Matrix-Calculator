@@ -76,12 +76,8 @@ public class Operation {
     return b;
   }
   //row 2 - row 1
-  public static void rowReduction(Matrix a, int row1, int row2){
-    int idx = 0;
-    while(a.getElmt(row2, idx) == 0){
-      idx++;
-    }
-    double anchor = a.getElmt(row2, idx)/a.getElmt(row1, idx);
+  public static void rowReduction(Matrix a, int row1, int row2, int col){
+    double anchor = a.getElmt(row2, col)/a.getElmt(row1, col);
     for(int i = 0; i < a.getCol(); i++){
       double elmt = a.getElmt(row2, i) - anchor * a.getElmt(row1, i);
       a.setElmt(row2, i, elmt);
