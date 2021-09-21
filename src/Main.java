@@ -1,12 +1,9 @@
-import java.util.Scanner;
-
-import Aplikasi.Determinan;
-import Aplikasi.Inverse;
+import Aplikasi.SistemPersamaanLinear;
 import Matrix.*;
 
 public class Main{
   public static void main(String[] args) {
-    Matrix a = new Matrix(3, 3);
+    Matrix a = new Matrix(4, 5);
     // Matrix b = new Matrix(2, 2);
     a.createMatrix();
     // b.createIdentityMatrix();
@@ -15,12 +12,13 @@ public class Main{
     // Operation.rowReduction(a, 0, 1);
     // Operation.rowReduction(a, 0, 2);
     Matrix b = new Matrix(a.getRow(), a.getCol());
-    b = Inverse.inverseAdjoint(a);
-    //Operation.rowReduction(a, 1, 2);
-    //Operation.rowTimesK(a, 1/a.getElmt(0, 0), 0);
-    //Operation.rowTimesK(a, 1/a.getElmt(1, 1), 1);
-    //Operation.rowTimesK(a, 1/a.getElmt(2, 2), 2);
-    // Operation.rowReduction(a, 1, 2);
+    b = SistemPersamaanLinear.SPLGaussJordan(a);
+    // //Operation.rowReduction(a, 1, 2);
+    // //Operation.rowTimesK(a, 1/a.getElmt(0, 0), 0);
+    // //Operation.rowTimesK(a, 1/a.getElmt(1, 1), 1);
+    // //Operation.rowTimesK(a, 1/a.getElmt(2, 2), 2);
+    // // Operation.rowReduction(a, 1, 2);
+    b.displayMatrix();
   }
 
   public static void menu() {
