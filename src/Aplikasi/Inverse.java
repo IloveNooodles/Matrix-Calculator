@@ -21,18 +21,18 @@ public class Inverse {
         return b;
       }
 
-      public static Matrix inverseAdjoint(Matrix a){
-        double det = Determinan.ekspansiKofaktor(a);
-        if (det==0){
-          return null;
+    public static Matrix inverseAdjoint(Matrix a){
+      double det = Determinan.ekspansiKofaktor(a);
+      if (det==0){
+        return null;
+      }
+      else{
+        Matrix b = new Matrix(a.getRow(), a.getCol());
+        b = adjoint(a);
+        for (int i=0;i<a.getRow();i++){
+            Operation.rowTimesK(b, 1/det, i);
         }
-        else{
-          Matrix b = new Matrix(a.getRow(), a.getCol());
-          b = adjoint(a);
-          for (int i=0;i<a.getRow();i++){
-              Operation.rowTimesK(b, 1/det, i);
-          }
-          return b;
-        }
-      } 
+        return b;
+      }
+    } 
 }

@@ -6,18 +6,21 @@ public class Matrix {
   private int row, col;
   private Double mtxr[][];
   private Scanner sc = new Scanner(System.in);
+  
   // KONSTRUKTOR
   public Matrix(){
     this.row = 0;
     this.col = 0;
   }
 
+  //membuat matrix dengan baris dengan kolom
   public Matrix(int row, int col){
     this.row = row;
     this.col = col;
     this.mtxr = new Double [row][col];
   }
 
+  //membuat dan mengisi matrix dengan konstanta c
   public Matrix(int row, int col, double c){
     this.row = row;
     this.col = col;
