@@ -21,18 +21,38 @@ public class Inverse {
         return b;
       }
 
-      public static Matrix inverseAdjoint(Matrix a){
-        double det = Determinan.ekspansiKofaktor(a);
-        if (det==0){
-          return null;
+    public static Matrix inverseAdjoint(Matrix a){
+      double det = Determinan.ekspansiKofaktor(a);
+      if (det==0){
+        return null;
+      }
+      else{
+        Matrix b = new Matrix(a.getRow(), a.getCol());
+        b = adjoint(a);
+        for (int i=0;i<a.getRow();i++){
+            Operation.rowTimesK(b, 1/det, i);
         }
-        else{
-          Matrix b = new Matrix(a.getRow(), a.getCol());
-          b = adjoint(a);
-          for (int i=0;i<a.getRow();i++){
-              Operation.rowTimesK(b, 1/det, i);
-          }
-          return b;
-        }
-      } 
+        return b;
+      }
+    }
+
+    public static Matrix eliminasiGaussJordan(Matrix a) {
+      /* KAMUS */
+      Matrix mAug, I, mHasil;
+      int i, j;
+
+      /* ALGORITMA */
+      mAug = new Matrix();
+      I = new Matrix(a.getRow(), a.getCol());
+      mHasil = new Matrix(a.getRow(), a.getCol());
+
+      I.createIdentityMatrix();
+      mAug = mAug.copyMatrix(Operation.augmentedMatrix(a, I));
+
+      for (j = 0; j < a.getCol(); j++) {
+        
+      }
+
+      return mHasil;
+    }
 }
