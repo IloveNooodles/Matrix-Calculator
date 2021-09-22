@@ -34,5 +34,25 @@ public class Inverse {
         }
         return b;
       }
-    } 
+    }
+
+    public static Matrix eliminasiGaussJordan(Matrix a) {
+      /* KAMUS */
+      Matrix mAug, I, mHasil;
+      int j;
+
+      /* ALGORITMA */
+      mAug = new Matrix();
+      I = new Matrix(a.getRow(), a.getCol());
+      mHasil = new Matrix(a.getRow(), a.getCol());
+
+      I.createIdentityMatrix();
+      mAug = mAug.copyMatrix(Operation.augmentedMatrix(a, I));
+
+      for (j = 0; j < a.getCol(); j++) {
+        
+      }
+
+      return mHasil;
+    }
 }

@@ -82,4 +82,27 @@ public class Operation {
       a.setElmt(row2, i, elmt);
     }
   }
+
+  public static Matrix augmentedMatrix(Matrix a, Matrix b) {
+    /* Prerequisite : jumlah baris a sama dengan jumlah baris b */
+
+    /* KAMUS */
+    Matrix m;
+    int i, j;
+
+    /* ALGORITMA */
+    m = new Matrix(a.getRow(), a.getCol() + b.getCol());
+
+    for (i = 0; i < m.getRow(); i++) {
+      for (j = 0; j < m.getCol(); j++) {
+        if (j < a.getCol()) {
+          m.setElmt(i, j, a.getElmt(i, j));
+        } else {
+          m.setElmt(i, j, b.getElmt(i, j - a.getCol()));
+        }
+      }
+    }
+
+    return m;
+  }
 }
