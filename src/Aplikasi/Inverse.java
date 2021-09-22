@@ -39,9 +39,10 @@ public class Inverse {
     public static Matrix eliminasiGaussJordan(Matrix a) {
       /* KAMUS */
       Matrix mAug, I, mHasil;
-      int j;
+      int i, j, idxMax;
 
       /* ALGORITMA */
+
       mAug = new Matrix();
       I = new Matrix(a.getRow(), a.getCol());
       mHasil = new Matrix(a.getRow(), a.getCol());
@@ -50,7 +51,34 @@ public class Inverse {
       mAug = mAug.copyMatrix(Operation.augmentedMatrix(a, I));
 
       for (j = 0; j < a.getCol(); j++) {
-        
+
+        idxMax = j;
+
+        for (i = j + 1; i < a.getRow(); i++) {
+          idxMax = Math.abs(mAug.getElmt(i, j)) > Math.abs(mAug.getElmt(idxMax, j)) ? i : idxMax;
+        }
+
+        if (Math.abs(mAug.getElmt(idxMax, j)) == 0) {
+          return null;
+        }
+
+        Operation.swapRow(mAug, idxMax, j);
+
+        for (i = 0; i < a.getRow(); i++) {
+          if (i == j) {
+            continue;
+          }
+          Operation.rowReduction(mAug, j, i, j);
+        }
+
+        Operation.rowTimesK(mAug, 1 / mAug.getElmt(j, j), j);
+
+      }
+
+      for (i = 0; i < a.getRow(); i++) {
+        for (j = 0; j < a.getCol(); j++) {
+          mHasil.setElmt(i, j, mAug.getElmt(i, j + a.getCol()));
+        }
       }
 
       return mHasil;
