@@ -85,4 +85,23 @@ public class Determinan {
         }
         return det;
     }
+
+    public static void determinanSarrus(Matrix m, double det){
+        det = 0;
+        if(m.isSquare()){
+            if(m.getRow()==3){
+                for (int i=0;i<3;i++){
+                    det +=m.getElmt(0,i)*(m.getElmt(1,(i+1)%3)*m.getElmt(2,(i+2)%3)-m.getElmt(1,(i+2)%3)*m.getElmt(2,(i+1)%3));
+                }
+                System.out.println("Determinan matriks tersebut adalah " + det);
+                return;
+            }
+            System.out.println("Ukuran matrix tidak 3x3, metode Sarrus tidak dapat digunakan");
+            return;
+        }
+        else{
+            System.out.println("Matrix tidak memiliki determinan");
+            return;
+        }
+    }
 }

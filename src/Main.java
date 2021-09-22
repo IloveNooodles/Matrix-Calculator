@@ -1,9 +1,10 @@
+import Aplikasi.Determinan;
 import Aplikasi.SistemPersamaanLinear;
 import Matrix.*;
 
 public class Main{
   public static void main(String[] args) {
-    Matrix a = new Matrix(4, 5);
+    Matrix a = new Matrix(3, 3);
     // Matrix b = new Matrix(2, 2);
     a.createMatrix();
     // b.createIdentityMatrix();
@@ -11,14 +12,16 @@ public class Main{
     // System.out.println(b.isIdentity());
     // Operation.rowReduction(a, 0, 1);
     // Operation.rowReduction(a, 0, 2);
-    Matrix b = new Matrix(a.getRow(), a.getCol());
-    b = SistemPersamaanLinear.SPLGaussJordan(a);
+    //Matrix b = new Matrix(a.getRow(), a.getCol());
+    // b = SistemPersamaanLinear.SPLGaussJordan(a);
     // //Operation.rowReduction(a, 1, 2);
     // //Operation.rowTimesK(a, 1/a.getElmt(0, 0), 0);
     // //Operation.rowTimesK(a, 1/a.getElmt(1, 1), 1);
     // //Operation.rowTimesK(a, 1/a.getElmt(2, 2), 2);
     // // Operation.rowReduction(a, 1, 2);
-    b.displayMatrix();
+    double det = 0;
+    Determinan.determinanSarrus(a, det);
+    a.displayMatrix();
   }
 
   public static void menu() {
