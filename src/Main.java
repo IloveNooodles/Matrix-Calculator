@@ -1,11 +1,17 @@
 import Aplikasi.Inverse;
+import Aplikasi.Determinan;
 import Matrix.*;
 
 public class Main{
   public static void main(String[] args) {
     Matrix a = new Matrix(3, 3);
     a.createMatrix();
-    Inverse.eliminasiGaussJordan(a);
+    System.out.println(Determinan.determinanOBE(a));
+    if (Inverse.eliminasiGaussJordan(a) == null) {
+      System.out.println("Matriks tidak bisa diinvers.");
+    } else {
+      Inverse.eliminasiGaussJordan(a).displayMatrix();
+    }
   }
 
   public static void menu() {
