@@ -64,6 +64,18 @@ public class Operation {
       a.setElmt(i, col2, temp);
     }
   }
+  //set col1 matrix a dengan col2 matrixb
+  public static void setCol(Matrix a, Matrix b, int col1,  int col2){
+    for(int i = 0; i < a.getRow(); i++){
+      a.setElmt(i, col1, b.getElmt(i, col2));
+    }
+  }
+
+  public static void setRow(Matrix a, Matrix b, int row1, int row2){
+    for(int i = 0; i < a.getCol(); i++){
+      a.setElmt(row1, i, b.getElmt(row2, i));
+    }
+  }
 
   public static Matrix transpose(Matrix a){
     Matrix b = new Matrix(a.getCol(), a.getRow());
@@ -105,4 +117,21 @@ public class Operation {
 
     return m;
   }
+
+  public static void splitAugmentedMatrix(Matrix in, Matrix a, Matrix b){
+    a.setRow(in.getRow());
+    a.setCol(in.getCol()-1);
+    b.setRow(in.getRow());
+    b.setCol(1);
+    for(int i = 0; i < in.getRow(); i++){
+      for(int j = 0; j < in.getCol(); j++){
+        if(j == in.getCol() - 1){
+          b.setElmt(i, 0, in.getElmt(i, j));
+        }else{
+          a.setElmt(i, j, in.getElmt(i, j));
+        }
+      }
+    }
+  }
+
 }
