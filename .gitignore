@@ -1,2 +1,5 @@
 #ignore class in src
-src/**/*.class
+/src/**/*.class
+
+#ignore vscode
+.vscode
