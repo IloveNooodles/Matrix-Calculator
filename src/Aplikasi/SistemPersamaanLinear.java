@@ -48,4 +48,23 @@ public class SistemPersamaanLinear {
 
         return n;
     }
+    
+    public static void SPLinverse(Matrix m){
+        Matrix a = new Matrix(m.getRow(),m.getCol()-1);
+        Matrix b = new Matrix(m.getRow(),1);
+        Operation.splitAugmentedMatrix(m, a, b);
+        if(a.isSquare()){
+            double det = Determinan.ekspansiKofaktor(a);
+            if (det==0){
+                System.out.println("Sistem tidak bisa diselesaikan dengan");
+                return;
+            }
+            else{
+                a = Operation.multMatrix(Inverse.inverseAdjoint(a), b);
+                for (int i=0;i<a.getRow();i++){
+                    System.out.println("x" + i + " = " + String.format("%.4f", a.getElmt(i, 0)));
+                }
+            }
+        }
+    }
 }
