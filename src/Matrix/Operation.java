@@ -77,6 +77,25 @@ public class Operation {
     }
   }
 
+
+  
+  public static int sumCol(Matrix m, int col){
+    int sum = 0;
+    for(int i = 0; i < m.getRow(); i++){
+      sum += m.getElmt(i, col);
+    }
+    return sum;
+  }
+
+  //NOTE ini mungkin overflow kaykanya diganti ke int?
+  public static int sumColTCol(Matrix m, int col1, int col2){
+    int sum = 0;
+    for(int i = 0; i < m.getRow(); i++){
+      sum += m.getElmt(i, col1)*m.getElmt(i, col2);
+    }
+    return sum;
+  }
+
   public static Matrix transpose(Matrix a){
     Matrix b = new Matrix(a.getCol(), a.getRow());
     for(int i = 0; i < a.getRow(); i++){
@@ -129,6 +148,23 @@ public class Operation {
           b.setElmt(i, 0, in.getElmt(i, j));
         }else{
           a.setElmt(i, j, in.getElmt(i, j));
+        }
+      }
+    }
+  }
+
+  public static void splitRLBMatrix(Matrix in, Matrix a, Matrix b){
+    a.setRow(in.getRow());
+    a.setCol(1);
+    b.setRow(in.getRow());
+    b.setCol(in.getCol() - 1);
+
+    for(int i = 0; i < in.getRow(); i++){
+      for(int j = 0; j < in.getCol(); j++){
+        if(j == 0){
+          a.setElmt(i, j, in.getElmt(i, j));
+        }else{
+          b.setElmt(i, j, in.getElmt(i, j));
         }
       }
     }

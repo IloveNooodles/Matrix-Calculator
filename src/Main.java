@@ -4,11 +4,9 @@ import Aplikasi.*;
 import java.io.*;
 import java.util.Scanner;
 
-import javax.swing.text.Utilities;
-
 public class Main{
   public static void main(String[] args) {
-    Menu.mainMenu();
-    System.out.println("GARE");
+    Matrix a = IO.readAugmentMatrix("1spl_a.txt");
+    Matrix ans = SistemPersamaanLinear.SPLGaussJordan(a);
   }
 }
