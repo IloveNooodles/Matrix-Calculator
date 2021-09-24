@@ -68,7 +68,7 @@ public class SistemPersamaanLinear {
         }
     }
 
-    public static Matrix matrixGauss (Matrix m){
+    public static Matrix SPLGauss(Matrix m) {
         Matrix n = new Matrix();
         n = n.copyMatrix(m);
         for (int i=0;i<n.getCol();i++){

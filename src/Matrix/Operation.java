@@ -152,22 +152,4 @@ public class Operation {
       }
     }
   }
-
-  public static void splitRLBMatrix(Matrix in, Matrix a, Matrix b){
-    a.setRow(in.getRow());
-    a.setCol(1);
-    b.setRow(in.getRow());
-    b.setCol(in.getCol() - 1);
-
-    for(int i = 0; i < in.getRow(); i++){
-      for(int j = 0; j < in.getCol(); j++){
-        if(j == 0){
-          a.setElmt(i, j, in.getElmt(i, j));
-        }else{
-          b.setElmt(i, j, in.getElmt(i, j));
-        }
-      }
-    }
-  }
-
 }

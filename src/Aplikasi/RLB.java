@@ -4,25 +4,42 @@ import Matrix.*;
 
 public class RLB {
   public static Matrix convertRLBMatrix(Matrix m){
-    //NOTE sebanyak n data dan k variabel akan dibentuk k x k matrix. Matrix y berupa kolom y dan matri x berupa n*k-1 matrix
-    int n = m.getRow();
-    int k = m.getCol();
-    Matrix y = new Matrix(), x = new Matrix();
-    Operation.splitRLBMatrix(m, y, x);
-    Matrix rlb = new Matrix(k, k);
-    for(int i = 0; i < rlb.getRow(); i++){
-      for(int j = 0; j < rlb.getCol(); j++){
+    /* KAMUS */
+    int n, k, i, j;
+    Matrix rlbX, rlbY, rlb;
+
+    /* ALGORITMA */
+    n = m.getRow();
+    k = m.getCol();
+
+    rlbX = new Matrix(k, k);
+    for(i = 0; i < rlbX.getRow(); i++){
+      for(j = 0; j < rlbX.getCol(); j++){
         if(i == 0 && j == 0){
-          rlb.setElmt(i, j, n);
+          rlbX.setElmt(i, j, n);
         }else if(i == 0){
-          rlb.setElmt(i, j, Operation.sumCol(x, j-1));
+          rlbX.setElmt(i, j, Operation.sumCol(m, j-1));
         }else if(i != 0 && j == 0){
-          rlb.setElmt(i, j, Operation.sumCol(x, i-1));
-        }else if(i != 0 && j != 0){
-          rlb.setElmt(i, j, Operation.sumColTCol(x, i-1, j-1));
+          rlbX.setElmt(i, j, Operation.sumCol(m, i-1));
+        }else {
+          rlbX.setElmt(i, j, Operation.sumColTCol(m, i-1, j-1));
         }
       }
     }
-    return rlb;
+    
+    rlbY = new Matrix(k, 1);
+    for (i = 0; i < rlbY.getRow(); i++) {
+      if (i == 0) {
+        rlbY.setElmt(i, 0, Operation.sumCol(m, m.getCol() - 1));
+      } else {
+        rlbY.setElmt(i, 0, Operation.sumColTCol(m, i - 1, m.getCol() - 1));
+      }
+    }
+
+    rlb = new Matrix();
+    rlb = rlb.copyMatrix(Operation.augmentedMatrix(rlbX, rlbY));
+
+    return SistemPersamaanLinear.SPLGaussJordan(rlb);
+
   }
 }
