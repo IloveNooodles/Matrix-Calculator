@@ -31,7 +31,7 @@ public class SistemPersamaanLinear {
                 continue;
             }
 
-            Operation.swapRow(m, idxMax, row);
+            Operation.swapRow(n, idxMax, row);
 
             for (i = 0; i < n.getRow(); i++) {
                 if (i == row) {

@@ -16,7 +16,7 @@ public class Main{
     m.createMatrix();
     //RLB.convertRLBMatrix(m).displayMatrix();
     Matrix n = new Matrix(4,7);
-    n = SistemPersamaanLinear.matrixGauss(m);
+    n = SistemPersamaanLinear.SPLGaussJordan(m);
     n.displayMatrix();
   }
 }
