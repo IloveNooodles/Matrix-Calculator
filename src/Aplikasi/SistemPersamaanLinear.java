@@ -68,19 +68,37 @@ public class SistemPersamaanLinear {
         }
     }
 
-    public static Matrix SPLGauss(Matrix m) {
+    public static Matrix matrixGauss (Matrix m){
+        //REVIEW cek kalau matrixGaussnya gajadi matriks segitiga.
         Matrix n = new Matrix();
         n = n.copyMatrix(m);
+        int utama = 0;
         for (int i=0;i<n.getCol();i++){
-            int max = i;
-            for (int j=i+1;j<n.getRow();j++){
+            int max = utama;
+            for (int j=utama+1;j<n.getRow();j++){
                 if (Math.abs(n.getElmt(j, i)) > Math.abs(n.getElmt(max, i))){
                     max = j;
                 }
             }
-            Operation.swapRow(n, i, max);
-            for (int k=i+1;k<n.getRow();k++){
-                Operation.rowReduction(n, i, k, i);
+            if (Math.abs(n.getElmt(max, i))==0){
+                continue;
+            }
+            else{
+                Operation.swapRow(n, utama, max);
+                Operation.rowTimesK(n, 1/(n.getElmt(utama, i)), utama);
+                for (int k=utama+1;k<n.getRow();k++){
+                    Operation.rowReduction(n, utama, k, i);
+                }
+                utama = utama + 1;
+            }
+            if (utama==n.getRow()-1){
+                for (int x=i+1;i<n.getCol();i++){
+                    if(Math.abs(n.getElmt(utama, i))>1.00e-4){
+                        Operation.rowTimesK(n, 1/(n.getElmt(utama, i)), utama);
+                        break;
+                    }
+                }
+                break;
             }
         }
         return n;

@@ -12,8 +12,11 @@ public class Main{
     //NOTE tentuin ini logicnya mau di main nya apa di menu nya aja biar literally pendek gitu di sininya oke makasih
     //Menu.mainMenu();
 
-    Matrix m = new Matrix(7, 3);
+    Matrix m = new Matrix(4, 7);
     m.createMatrix();
-    RLB.convertRLBMatrix(m).displayMatrix();
+    //RLB.convertRLBMatrix(m).displayMatrix();
+    Matrix n = new Matrix(4,7);
+    n = SistemPersamaanLinear.matrixGauss(m);
+    n.displayMatrix();
   }
 }
