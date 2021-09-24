@@ -67,4 +67,22 @@ public class SistemPersamaanLinear {
             }
         }
     }
+
+    public static Matrix matrixGauss (Matrix m){
+        Matrix n = new Matrix();
+        n = n.copyMatrix(m);
+        for (int i=0;i<n.getCol();i++){
+            int max = i;
+            for (int j=i+1;j<n.getRow();j++){
+                if (Math.abs(n.getElmt(j, i)) > Math.abs(n.getElmt(max, i))){
+                    max = j;
+                }
+            }
+            Operation.swapRow(n, i, max);
+            for (int k=i+1;k<n.getRow();k++){
+                Operation.rowReduction(n, i, k, i);
+            }
+        }
+        return n;
+    }
 }
