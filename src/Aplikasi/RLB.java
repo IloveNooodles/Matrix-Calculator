@@ -1,6 +1,7 @@
 package Aplikasi;
 
 import Matrix.*;
+import java.util.Scanner;
 
 public class RLB {
   public static Matrix convertRLBMatrix(Matrix m){
@@ -41,5 +42,20 @@ public class RLB {
 
     return SistemPersamaanLinear.SPLGaussJordan(rlb);
 
+  }
+
+  public static Matrix inputRLB() {
+    /* KAMUS */
+    Matrix m;
+    int k;
+
+    /* ALGORITMA */
+    Scanner sc = new Scanner(System.in);
+    k = sc.nextInt();
+    m = new Matrix(k, k + 1);
+    m.createMatrix();
+    sc.close();
+
+    return m;
   }
 }
