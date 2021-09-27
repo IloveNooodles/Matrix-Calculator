@@ -1,5 +1,6 @@
 package Matrix;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Matrix {
@@ -123,5 +124,12 @@ public class Matrix {
       }
     }
     return identity;
+  }
+  public void setPrecision(Matrix m){
+    for(int i = 0; i < m.getRow(); i++){
+      for(int j = 0; j < m.getCol(); j++){
+        // m.setElmt(i, j, BigDecimal.valueOf(m.getElmt(row, col)));
+      }
+    }
   }
 }

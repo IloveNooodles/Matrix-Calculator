@@ -40,7 +40,7 @@ public class RLB {
     rlb = new Matrix();
     rlb = rlb.copyMatrix(Operation.augmentedMatrix(rlbX, rlbY));
 
-    return SistemPersamaanLinear.SPLGaussJordan(rlb);
+    return SistemPersamaanLinear.MatrixGaussJordan(rlb);
 
   }
 
