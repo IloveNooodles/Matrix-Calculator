@@ -82,8 +82,8 @@ public class Operation {
 
 
   
-  public static int sumCol(Matrix m, int col){
-    int sum = 0;
+  public static double sumCol(Matrix m, int col){
+    double sum = 0;
     for(int i = 0; i < m.getRow(); i++){
       sum += m.getElmt(i, col);
     }
@@ -91,8 +91,8 @@ public class Operation {
   }
 
   //NOTE ini mungkin overflow kaykanya diganti ke int?
-  public static int sumColTCol(Matrix m, int col1, int col2){
-    int sum = 0;
+  public static double sumColTCol(Matrix m, int col1, int col2){
+    double sum = 0;
     for(int i = 0; i < m.getRow(); i++){
       sum += m.getElmt(i, col1)*m.getElmt(i, col2);
     }
