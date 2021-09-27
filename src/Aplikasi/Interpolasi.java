@@ -26,5 +26,6 @@ public class Interpolasi {
                 System.out.print(String.format("+ " + "%.4f", b.getElmt(k, n)) + "x^" + k);
             }
         }
+        sc.close();
     }
 }
