@@ -60,6 +60,11 @@ public class Determinan {
 
         return hasil;
     }
+
+    public static void displayEkspansiKofaktor(Matrix m) {
+        System.out.println("Determinant matriks tersebut adalah " + ekspansiKofaktor(m));
+    }
+
     public static double determinanOBE(Matrix m){
         Matrix n = new Matrix();
         n = n.copyMatrix(m);
@@ -86,8 +91,12 @@ public class Determinan {
         return det;
     }
 
-    public static void determinanSarrus(Matrix m, double det){
-        det = 0;
+    public static void displayOBE(Matrix m) {
+        System.out.println("Deteriman matriks tersebut adalah " + determinanOBE(m));
+    }
+
+    public static void displaySarrus(Matrix m) {
+        double det = 0;
         if(m.isSquare()){
             if(m.getRow()==3){
                 for (int i=0;i<3;i++){

@@ -47,10 +47,10 @@ public class Menu {
             break;
           case 2:
             inputInterpolasi();
+            InterpolasiKeyboard();
             break;
           default:
             System.out.println("\nMohon masukan input yang benar!");
-            System.out.println("Exiting...");
             break;
         }
         break;
@@ -66,7 +66,6 @@ public class Menu {
             break;
           default:
             System.out.println("\nMohon masukan input yang benar!");
-            System.out.println("Exiting...");
             break;
         }
         break;
@@ -79,10 +78,10 @@ public class Menu {
             break;
           case 2:
             inputSqMatrix();
+            DeterminanKeyboard();
             break;
           default:
             System.out.println("\nMohon masukan input yang benar!");
-            System.out.println("Exiting...");
             break;
         }
         break;
@@ -95,10 +94,10 @@ public class Menu {
             break;
           case 2:
             inputSqMatrix();
+            InverseKeyboard();
             break;
           default:
             System.out.println("\nMohon masukan input yang benar!");
-            System.out.println("Exiting...");
             break;
         }
         break;
@@ -111,10 +110,10 @@ public class Menu {
             break;
           case 2:
             inputMatrix();
+            SPLKeyboard();
             break;
           default:
             System.out.println("\nMohon masukan input yang benar!");
-            System.out.println("Exiting...");
             break;
         }
         break;
@@ -126,11 +125,11 @@ public class Menu {
             io();
             break;
           case 2:
-            inputMatrix();
+            inputTranspose();
+            TransposeKeyboard();
             break;
           default:
             System.out.println("\nMohon masukan input yang benar!");
-            System.out.println("Exiting...");
             break;
         }
         break;
@@ -138,7 +137,6 @@ public class Menu {
         exit();
       default:
         System.out.println("\nMohon masukan input yang benar!");
-        System.out.println("Exiting...");
         break;
     }
   }
@@ -176,14 +174,14 @@ public class Menu {
 
   public static void inputSqMatrix(){
     System.out.println("");
-    System.out.println("Akan dibuat matrix berukuran n x n!");
+    System.out.println("Akan dibuat matrix berukuran n x n");
     System.out.print("Masukan n: "); 
     int n = sc.nextInt();
 
     m.setRow(n);
     m.setCol(n);
 
-    System.out.println("Silahkan masukan matriks setiap element matrix: ");
+    System.out.println("Silahkan masukan setiap element matrix: ");
     m.createMatrix();
   }
 
@@ -199,33 +197,118 @@ public class Menu {
 
   public static void inputRegresi(){
     System.out.println("");
-    System.out.println("Akan dibuat RLB (Regresi Linear Berganda) dengan k peubah");
+    System.out.println("Akan dibuat RLB (Regresi Linear Berganda) dengan n buah persamaan dengan k peubah");
+    System.out.print("Masukan n:");
+    int n = sc.nextInt();
     System.out.print("Masukan k: ");
     int k = sc.nextInt();
     System.out.println("Silahkan masukkan data:");
 
-    m = RLB.inputRLB(k);
+    m = RLB.inputRLB(n, k);
   }
 
-  public static void SPL(){
+  public static void inputTranspose() {
+    System.out.println("");
+    System.out.println("Akan dibuat transpose matriks n x n");
+    System.out.print("Masukan n: ");
+    int n = sc.nextInt();
+
+    m.setRow(n);
+    m.setCol(n);
+
+    System.out.println("Silahkan masukan setiap element matrix: ");
+    m.createMatrix();
+  }
+
+  public static void SPLKeyboard(){
     System.out.println("");
     System.out.println("###### Pilih metode yang ingin digunakan ######");
     System.out.println("1. Metode Eliminasi Gauss");
     System.out.println("2. Metode Eliminasi Gauss-Jordan");
     System.out.println("3. Metode Matriks Balikan");
     System.out.println("4. Kaidah Cramer");
-    System.out.println("5. Keluar");
     System.out.print("Masukan pilihan: ");
+    int i = sc.nextInt();
+
+    switch (i) {
+      case 1:
+        SistemPersamaanLinear.SPLGauss(m);
+        break;
+      case 2:
+        SistemPersamaanLinear.SPLGaussJordan(m);
+        break;
+      case 3:
+        SistemPersamaanLinear.SPLinverse(m);
+        break;
+      case 4:
+        Crammer.crammer(m);
+        break;
+      default:
+        System.out.println("\nMohon masukan input yang benar!");
+        break;
+    }
   }
 
-  public static void Determinan() {
+  public static void DeterminanKeyboard() {
     System.out.println("");
     System.out.println("###### Pilih metode yang ingin digunakan ######");
     System.out.println("1. Metode Eliminasi Gauss");
     System.out.println("2. Metode Ekspansi Kofaktor");
     System.out.println("3. Metode Sarrus");
-    System.out.println("4. Keluar");
     System.out.print("Masukan pilihan: ");
+    int i = sc.nextInt();
+
+    switch (i) {
+      case 1:
+        Determinan.displayOBE(m);
+        break;
+      case 2:
+        Determinan.displayEkspansiKofaktor(m);
+        break;
+      case 3:
+        Determinan.displaySarrus(m); 
+        break;
+      default:
+        System.out.println("\nMohon masukan input yang benar!");
+        break;
+    }
+  }
+
+  public static void InverseKeyboard() {
+    System.out.println("");
+    System.out.println("###### Pilih metode yang ingin digunakan ######");
+    System.out.println("1. Metode Eliminasi Gauss-Jordan");
+    System.out.println("2. Metode Adjoint");
+    System.out.print("Masukan pilihan: ");
+    int i = sc.nextInt();
+
+    switch (i) {
+      case 1:
+        Inverse.displayGaussJordan(m);
+        break;
+      case 2:
+        Inverse.displayInverseAdjoint(m);
+        break;
+      default:
+        System.out.println("\nMohon masukan input yang benar!");
+        break;
+    }
+  }
+
+  public static void TransposeKeyboard() {
+    System.out.println("");
+    System.out.println("Transpose dari matriks tersbeut adalah: ");
+    Operation.transpose(m).displayMatrix();
+  }
+
+  public static void InterpolasiKeyboard() {
+    System.out.println("");
+    System.out.println("Hasil interpolasi data tersebut adalah: ");
+    Interpolasi.keluarkanInterpolasi(m);
+  }
+
+  public static void RegresiKeyboard() {
+    System.out.println("");
   }
 
   public static void io(){
