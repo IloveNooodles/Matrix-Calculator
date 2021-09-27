@@ -69,6 +69,7 @@ public class RLB {
 
     sc.close();
 
-    return convertRLBMatrix(m);
+    return m;
+    // return convertRLBMatrix(m);
   }
 }
