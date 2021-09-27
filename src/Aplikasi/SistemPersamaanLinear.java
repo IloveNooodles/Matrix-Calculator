@@ -4,8 +4,71 @@ import Matrix.Matrix;
 import Matrix.Operation;
 
 public class SistemPersamaanLinear {
+    public static boolean IsEmpty (double[] m) {
+        for (int i = 0; i < m.length; i++) {
+            if (m[i] != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static String ToString(double[] m){
+        String variabel = "abcdefghijklmnopqrstuvwxyz";
+        String ans = "";
+        for (int i=1;i<m.length;i++){
+            if(Math.abs(m[i])>=1.00e-4){
+                if (ans==""){
+                    if(Math.abs(m[i]-1)<=1.00e-4){
+                        ans = variabel.substring(i-1, i);
+                    }
+                    else if(Math.abs(m[i]+1)<=1.00e-4){
+                        ans = "-" + variabel.substring(i-1, i);
+                    }
+                    else{
+                        ans = String.format("%.2f", m[i]) + variabel.substring(i-1, i);
+                    }
+                }
+                else{
+                    if (m[i] > 0) {
+                        if (Math.abs(m[i]-1)<=1.00e-4) {
+                            ans += " + " + variabel.substring(i-1, i);
+                        } 
+                        else {
+                            ans += " + " + String.format("%.2f", m[i]) + variabel.substring(i-1, i);
+                        }
+                    } 
+                    else {
+                        if (Math.abs(m[i]+1)<=1.00e-4) {
+                            ans += " - " + variabel.substring(i-1, i);
+                        } else {
+                            ans += " - " + String.format("%.2f", m[i]*(-1)) + variabel.substring(i-1, i);
+                        }
+                    }
+                }
+            }
+        }
+        if(Math.abs(m[0])>=1.00e-4){
+            if(ans==""){
+                ans = String.format("%.2f", m[0]);
+            }
+            else{
+                if(Math.abs(m[0])>=1.00e-4){
+                    ans += " + " + String.format("%.2f", m[0]);
+                }
+                else{
+                    ans += " - " + String.format("%.2f", m[0]*(-1));
+                }
+            }
+        }
+        else{
+            if(ans==""){
+                ans = "0";
+            }
+        }
+        return ans;
+    }
 
-    public static Matrix SPLGaussJordan(Matrix m) {
+    public static Matrix MatrixGaussJordan(Matrix m) {
         /* KAMUS */
         Matrix n;
         int i, j, idxMax, row;
@@ -102,5 +165,118 @@ public class SistemPersamaanLinear {
             }
         }
         return n;
+    }
+    public static void SPLGauss(Matrix m){
+        String variable = "abcdefghijklmnopqrstuvwxyz";
+        boolean noSolution = false;
+        m = matrixGauss(m);
+        double[][] solusi = new double[27][27];
+        int variabel = 1;
+        for (int i=m.getRow()-1;i>=0;i--){
+            int found = -1;
+            double[] hasil = new double[27];
+            for (int j=0;j<m.getCol();j++){
+                if(Math.abs(m.getElmt(i, j))>=1.00e-4){
+                    if(j==m.getCol()-1){
+                        hasil[0] += m.getElmt(i, j);
+                    }
+                    else{
+                        if(IsEmpty(solusi[j])){
+                            if(found!=-1){
+                                solusi[j][variabel] = 1;
+                                hasil[variabel] = (-1)*m.getElmt(i, j);
+                                variabel+=1;
+                            }
+                            else{
+                                found = j;
+                            } 
+                        }
+                        else{
+                            for (int k=0;k<27;k++){
+                                hasil[k] = hasil[k] - solusi[j][k]*m.getElmt(i, j);
+                            }
+                        }
+                    }
+                }
+            }
+            if(found==-1){
+                if(Math.abs(m.getElmt(i, m.getCol()-1))>=1.00e-4){
+                    noSolution = true;
+                }
+            }
+            else{
+                solusi[found] = hasil;
+            } 
+        }
+        if (noSolution){
+            System.out.println("SPL tidak memiliki solusi");
+        }
+        else{
+            for (int i=0;i<solusi.length;i++){
+                if(IsEmpty(solusi[i])){
+                    continue;
+                }
+                else{
+                    System.out.println("x" + (i+1) + " = " + ToString(solusi[i]));
+                }
+            }
+        }
+    }
+
+    public static void SPLGaussJordan(Matrix m){
+        String variable = "abcdefghijklmnopqrstuvwxyz";
+        boolean noSolution = false;
+        m = MatrixGaussJordan(m);
+        double[][] solusi = new double[27][27];
+        int variabel = 1;
+        for (int i=m.getRow()-1;i>=0;i--){
+            int found = -1;
+            double[] hasil = new double[27];
+            for (int j=0;j<m.getCol();j++){
+                if(Math.abs(m.getElmt(i, j))>=1.00e-4){
+                    if(j==m.getCol()-1){
+                        hasil[0] += m.getElmt(i, j);
+                    }
+                    else{
+                        if(IsEmpty(solusi[j])){
+                            if(found!=-1){
+                                solusi[j][variabel] = 1;
+                                hasil[variabel] = (-1)*m.getElmt(i, j);
+                                variabel+=1;
+                            }
+                            else{
+                                found = j;
+                            } 
+                        }
+                        else{
+                            for (int k=0;k<27;k++){
+                                hasil[k] = hasil[k] - solusi[j][k]*m.getElmt(i, j);
+                            }
+                        }
+                    }
+                }
+            }
+            if(found==-1){
+                if(Math.abs(m.getElmt(i, m.getCol()-1))>=1.00e-4){
+                    noSolution = true;
+                }
+            }
+            else{
+                solusi[found] = hasil;
+            } 
+        }
+        if (noSolution){
+            System.out.println("SPL tidak memiliki solusi");
+        }
+        else{
+            for (int i=0;i<solusi.length;i++){
+                if(IsEmpty(solusi[i])){
+                    continue;
+                }
+                else{
+                    System.out.println("x" + (i+1) + " = " + ToString(solusi[i]));
+                }
+            }
+        }
     }
 }

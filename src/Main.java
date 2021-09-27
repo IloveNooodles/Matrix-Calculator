@@ -15,8 +15,6 @@ public class Main{
     Matrix m = new Matrix(4, 7);
     m.createMatrix();
     //RLB.convertRLBMatrix(m).displayMatrix();
-    Matrix n = new Matrix(4,7);
-    n = SistemPersamaanLinear.SPLGaussJordan(m);
-    n.displayMatrix();
+    SistemPersamaanLinear.SPLGaussJordan(m);
   }
 }
