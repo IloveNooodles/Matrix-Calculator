@@ -27,7 +27,7 @@ public class Interpolasi {
     public static void keluarkanInterpolasi() {
         int n = jumlahKolom;
         Matrix b = new Matrix();
-        b = SistemPersamaanLinear.SPLGaussJordan(a);
+        b = SistemPersamaanLinear.MatrixGaussJordan(a);
         for (int k=0;k<n;k++){
             if(k==0){
                 System.out.print(String.format("%.4f", b.getElmt(k,n)));
