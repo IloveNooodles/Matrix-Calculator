@@ -56,6 +56,6 @@ public class RLB {
     m.createMatrix();
     sc.close();
 
-    return m;
+    return convertRLBMatrix(m);
   }
 }
