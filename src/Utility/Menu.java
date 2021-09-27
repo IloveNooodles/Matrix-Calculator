@@ -63,6 +63,7 @@ public class Menu {
             break;
           case 2:
             inputRegresi();
+            RegresiKeyboard();
             break;
           default:
             System.out.println("\nMohon masukan input yang benar!");
@@ -309,6 +310,10 @@ public class Menu {
 
   public static void RegresiKeyboard() {
     System.out.println("");
+    System.out.print("Masukkan jumlah titik data yang ingin dipredikasi: ");
+    int x = sc.nextInt();
+
+    RLB.outputRLB(m, x);
   }
 
   public static void io(){
