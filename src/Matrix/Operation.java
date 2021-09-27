@@ -1,5 +1,8 @@
 package Matrix;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Operation {
 
   public static Matrix addMatrix(Matrix a, Matrix b){
@@ -150,6 +153,12 @@ public class Operation {
           a.setElmt(i, j, in.getElmt(i, j));
         }
       }
+    }
+  }
+
+  public static void setPrecisionArray(double[] d, int scale){
+    for(int i = 0; i < d.length; i++){
+      d[i] = BigDecimal.valueOf(d[i]).setScale(scale, RoundingMode.HALF_UP).doubleValue();
     }
   }
 }

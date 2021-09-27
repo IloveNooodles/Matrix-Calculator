@@ -1,6 +1,7 @@
 package Matrix;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class Matrix {
@@ -62,6 +63,7 @@ public class Matrix {
     for(int i = 0; i < this.row; i++){
       for(int j = 0; j < this.col; j++){
         double d = sc.nextDouble();
+        d = BigDecimal.valueOf(d).setScale(4, RoundingMode.HALF_UP).doubleValue();
         this.mtxr[i][j] = d;
       }
     }
@@ -125,10 +127,10 @@ public class Matrix {
     }
     return identity;
   }
-  public void setPrecision(Matrix m){
-    for(int i = 0; i < m.getRow(); i++){
-      for(int j = 0; j < m.getCol(); j++){
-        // m.setElmt(i, j, BigDecimal.valueOf(m.getElmt(row, col)));
+  public void setPrecision(int scale){
+    for(int i = 0; i < this.row; i++){
+      for(int j = 0; j < this.col; j++){
+        this.mtxr[i][j] = BigDecimal.valueOf(this.mtxr[i][j]).setScale(scale, RoundingMode.HALF_UP).doubleValue();
       }
     }
   }
