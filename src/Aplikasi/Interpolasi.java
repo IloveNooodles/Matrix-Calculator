@@ -5,8 +5,12 @@ import java.util.Scanner;
 import Matrix.Matrix;
 
 public class Interpolasi {
-    public static void interpolasi(int n){
-        Matrix a = new Matrix(n, n+1);
+    private static Matrix a;
+    private static int jumlahKolom;
+    public static Matrix masukkanInterpolasi(int n){
+        a = new Matrix(n, n+1);
+        jumlahKolom = n;
+
         Scanner sc = new Scanner(System.in);
         for (int i=0;i<n;i++){
             double x = sc.nextDouble();
@@ -16,16 +20,21 @@ public class Interpolasi {
                 a.setElmt(i, j, Math.pow(x, j));
             }
         }
+        sc.close();
+
+        return a;
+    }
+    public static void keluarkanInterpolasi() {
+        int n = jumlahKolom;
         Matrix b = new Matrix();
         b = SistemPersamaanLinear.SPLGaussJordan(a);
         for (int k=0;k<n;k++){
             if(k==0){
                 System.out.print(String.format("%.4f", b.getElmt(k,n)));
             }
-            else{
+            else {
                 System.out.print(String.format("+ " + "%.4f", b.getElmt(k, n)) + "x^" + k);
             }
         }
-        sc.close();
     }
 }
