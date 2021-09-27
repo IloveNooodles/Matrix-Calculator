@@ -40,27 +40,28 @@ public class RLB {
     rlb = new Matrix();
     rlb = rlb.copyMatrix(Operation.augmentedMatrix(rlbX, rlbY));
 
-    return SistemPersamaanLinear.MatrixGaussJordan(rlb);
+    return rlb;
+    // return SistemPersamaanLinear.MatrixGaussJordan(rlb);
 
   }
 
-  public static Matrix inputRLB(int k) {
+  public static Matrix inputRLB(int n, int k) {
     /* KAMUS */
     Matrix m;
     double elmt;
 
     /* ALGORITMA */
     Scanner sc = new Scanner(System.in);
-    m = new Matrix(k, k + 1);
+    m = new Matrix(n, k + 1);
 
-    for (int i = 0; i < k; i++) {
+    for (int i = 0; i < n; i++) {
       for (int j = 0; j < k + 1; j++) {
         if (j == k) {
-          System.out.print("Nilai y ke-" + (i + 1) + " : ");
+          // System.out.print("Nilai y ke-" + (i + 1) + " : ");
           elmt = sc.nextDouble();
           m.setElmt(i, j, elmt);
         } else {
-          System.out.print("Nilai x" + (j + 1) + " ke-" + (i + 1) + " : ");
+          // System.out.print("Nilai x" + (j + 1) + " ke-" + (i + 1) + " : ");
           elmt = sc.nextDouble();
           m.setElmt(i, j, elmt);
         }
@@ -68,8 +69,6 @@ public class RLB {
     }
 
     sc.close();
-
-    return m;
-    // return convertRLBMatrix(m);
+    return convertRLBMatrix(m);
   }
 }

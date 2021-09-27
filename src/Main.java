@@ -13,7 +13,12 @@ public class Main{
     //NOTE tentuin ini logicnya mau di main nya apa di menu nya aja biar literally pendek gitu di sininya oke makasih
     // Menu.mainMenu();
     Matrix m = new Matrix();
-    m = RLB.inputRLB(4);
+    m = IO.readMatrix("regresi.txt");
+    m.displayMatrix();
+    // System.out.println(Operation.sumCol(m, 0));
+    System.out.println("A");
+    m = RLB.convertRLBMatrix(m);
+    m.setPrecision(4);
     m.displayMatrix();
     //RLB.convertRLBMatrix(m).displayMatrix();
     // SistemPersamaanLinear.SPLGaussJordan(m);

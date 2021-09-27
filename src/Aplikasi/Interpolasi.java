@@ -5,11 +5,8 @@ import java.util.Scanner;
 import Matrix.Matrix;
 
 public class Interpolasi {
-    private static Matrix a;
-    private static int jumlahKolom;
-    public static Matrix masukkanInterpolasi(int n){
-        a = new Matrix(n, n+1);
-        jumlahKolom = n;
+    public static Matrix masukkanInterpolasi(int n) {
+        Matrix a = new Matrix(n, n+1);
 
         Scanner sc = new Scanner(System.in);
         for (int i=0;i<n;i++){
@@ -24,8 +21,8 @@ public class Interpolasi {
 
         return a;
     }
-    public static void keluarkanInterpolasi() {
-        int n = jumlahKolom;
+    public static void keluarkanInterpolasi(Matrix a) {
+        int n = a.getCol();
         Matrix b = new Matrix();
         b = SistemPersamaanLinear.MatrixGaussJordan(a);
         for (int k=0;k<n;k++){

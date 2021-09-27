@@ -3,7 +3,14 @@ package Aplikasi;
 import Matrix.*;
 
 public class Crammer {
-  public static void crammer(Matrix a, Matrix b){
+  public static void crammer(Matrix m){
+    Matrix a, b;
+
+    a = new Matrix();
+    b = new Matrix();
+
+    Operation.splitAugmentedMatrix(m, a, b);
+
     double temp = Determinan.ekspansiKofaktor(a);
     if(temp == 0){
       System.out.println("Determinan Matrix 0");

@@ -36,6 +36,16 @@ public class Inverse {
       }
     }
 
+    public static void displayInverseAdjoint(Matrix m) {
+      Matrix n = inverseAdjoint(m);
+      if (n == null) {
+        System.out.println("Matriks tidak mempunyai balikan");
+      } else {
+        System.out.println("Balikan dari matriks tersebut adalah: ");
+        n.displayMatrix();
+      }
+    }
+
     public static Matrix eliminasiGaussJordan(Matrix a) {
       /* KAMUS */
       Matrix mAug, I, mHasil;
@@ -82,5 +92,15 @@ public class Inverse {
       }
 
       return mHasil;
+    }
+
+    public static void displayGaussJordan(Matrix m) {
+      Matrix n = eliminasiGaussJordan(m);
+      if (n == null) {
+        System.out.println("Matriks tidak mempunyai balikan");
+      } else {
+        System.out.println("Balikan dari matriks tersebut adalah: ");
+        n.displayMatrix();
+      }
     }
 }
