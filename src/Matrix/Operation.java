@@ -12,6 +12,7 @@ public class Operation {
         c.setElmt(i, j, (a.getElmt(i, j) + b.getElmt(i, j)));
       }
     }
+    c.setPrecision(4);
     return c;
   }
   
@@ -22,6 +23,7 @@ public class Operation {
         c.setElmt(i, j, (a.getElmt(i, j) - b.getElmt(i, j)));
       }
     }
+    c.setPrecision(4);
     return c;
   }
 
@@ -30,6 +32,7 @@ public class Operation {
     for(int i = 0; i < a.getCol(); i++){
       ans += a.getElmt(row, i) * b.getElmt(i, col);
     }
+    ans = setPrecisionValue(ans, 4);
     return ans;
   }
 
@@ -41,6 +44,7 @@ public class Operation {
         c.setElmt(i, j, elmt);
       }
     }
+    c.setPrecision(4);
     return c;
   }
 
@@ -49,6 +53,7 @@ public class Operation {
     for(int i = 0; i < a.getCol(); i++){
       a.setElmt(row, i, k*a.getElmt(row, i));
     }
+    a.setPrecision(4);
   }
   //menukar kolom 1 dengan kolom2
   public static void swapRow(Matrix a, int row1, int row2){
@@ -58,6 +63,7 @@ public class Operation {
       a.setElmt(row1, i, a.getElmt(row2, i));
       a.setElmt(row2, i, temp);
     }
+    a.setPrecision(4);
   }
   public static void swapCol(Matrix a, int col1, int col2){
     double temp;
@@ -66,18 +72,21 @@ public class Operation {
       a.setElmt(i, col1, a.getElmt(i, col2));
       a.setElmt(i, col2, temp);
     }
+    a.setPrecision(4);
   }
   //set col1 matrix a dengan col2 matrixb
   public static void setCol(Matrix a, Matrix b, int col1,  int col2){
     for(int i = 0; i < a.getRow(); i++){
       a.setElmt(i, col1, b.getElmt(i, col2));
     }
+    a.setPrecision(4);
   }
 
   public static void setRow(Matrix a, Matrix b, int row1, int row2){
     for(int i = 0; i < a.getCol(); i++){
       a.setElmt(row1, i, b.getElmt(row2, i));
     }
+    a.setPrecision(4);
   }
 
 
@@ -87,6 +96,7 @@ public class Operation {
     for(int i = 0; i < m.getRow(); i++){
       sum += m.getElmt(i, col);
     }
+    sum = setPrecisionValue(sum, 4);
     return sum;
   }
 
@@ -96,6 +106,7 @@ public class Operation {
     for(int i = 0; i < m.getRow(); i++){
       sum += m.getElmt(i, col1)*m.getElmt(i, col2);
     }
+    sum = setPrecisionValue(sum, 4);
     return sum;
   }
 
@@ -115,6 +126,7 @@ public class Operation {
       double elmt = a.getElmt(row2, i) - anchor * a.getElmt(row1, i);
       a.setElmt(row2, i, elmt);
     }
+    a.setPrecision(4);
   }
 
   public static Matrix augmentedMatrix(Matrix a, Matrix b) {
@@ -156,9 +168,21 @@ public class Operation {
     }
   }
 
+  public static double setPrecisionValue(double d, int scale){
+    return BigDecimal.valueOf(d).setScale(scale, RoundingMode.HALF_UP).doubleValue();
+  }
+
   public static void setPrecisionArray(double[] d, int scale){
     for(int i = 0; i < d.length; i++){
       d[i] = BigDecimal.valueOf(d[i]).setScale(scale, RoundingMode.HALF_UP).doubleValue();
+    }
+  }
+
+  public static void setPrecision2DArray(double[][] d, int scale){
+    for(int i = 0; i < d.length; i++){
+      for(int j = 0; j < d[0].length; j++){
+        d[i][j] = BigDecimal.valueOf(d[i][j]).setScale(scale, RoundingMode.HALF_UP).doubleValue();
+      }
     }
   }
 }
