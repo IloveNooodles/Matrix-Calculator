@@ -15,6 +15,7 @@ public class SistemPersamaanLinear {
     public static String ToString(double[] m){
         String variabel = "abcdefghijklmnopqrstuvwxyz";
         String ans = "";
+        Operation.setPrecisionArray(m, 4);
         for (int i=1;i<m.length;i++){
             if(Math.abs(m[i])>=1.00e-4){
                 if (ans==""){
