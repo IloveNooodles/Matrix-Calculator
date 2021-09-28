@@ -2,6 +2,7 @@ package Aplikasi;
 
 import Matrix.Matrix;
 import Matrix.Operation;
+import Utility.IO;
 
 public class SistemPersamaanLinear {
     public static boolean IsEmpty (double[] m) {
@@ -120,13 +121,32 @@ public class SistemPersamaanLinear {
         if(a.isSquare()){
             double det = Determinan.ekspansiKofaktor(a);
             if (det==0){
-                System.out.println("Sistem tidak bisa diselesaikan dengan");
+                System.out.println("Sistem tidak bisa diselesaikan dengan inverse matriks");
                 return;
             }
             else{
                 a = Operation.multMatrix(Inverse.inverseAdjoint(a), b);
                 for (int i=0;i<a.getRow();i++){
                     System.out.println("x" + i + " = " + String.format("%.4f", a.getElmt(i, 0)));
+                }
+            }
+        }
+    }
+
+    public static void FileSPLinverse(Matrix m, String namaFile) {
+        Matrix a = new Matrix(m.getRow(),m.getCol()-1);
+        Matrix b = new Matrix(m.getRow(),1);
+        Operation.splitAugmentedMatrix(m, a, b);
+        if(a.isSquare()){
+            double det = Determinan.ekspansiKofaktor(a);
+            if (det==0){
+                IO.writeFileString(namaFile, "Sistem tidak bisa diselesaikan dengan inverse matriks");
+                return;
+            }
+            else{
+                a = Operation.multMatrix(Inverse.inverseAdjoint(a), b);
+                for (int i=0;i<a.getRow();i++){
+                    IO.writeFileString(namaFile, "x" + i + " = " + String.format("%.4f", a.getElmt(i, 0)));
                 }
             }
         }
@@ -219,6 +239,58 @@ public class SistemPersamaanLinear {
         }
     }
 
+    public static void FileSPLGauss(Matrix m, String namaFile) {
+        String variable = "abcdefghijklmnopqrstuvwxyz";
+        boolean noSolution = false;
+        m = matrixGauss(m);
+        double[][] solusi = new double[27][27];
+        int variabel = 1;
+        for (int i=m.getRow()-1;i>=0;i--){
+            int found = -1;
+            double[] hasil = new double[27];
+            for (int j=0;j<m.getCol();j++){
+                if(Math.abs(m.getElmt(i, j))>=1.00e-4){
+                    if(j==m.getCol()-1){
+                        hasil[0] += m.getElmt(i, j);
+                    }
+                    else{
+                        if(IsEmpty(solusi[j])){
+                            if(found!=-1){
+                                solusi[j][variabel] = 1;
+                                hasil[variabel] = (-1)*m.getElmt(i, j);
+                                variabel+=1;
+                            }
+                            else{
+                                found = j;
+                            } 
+                        }
+                        else{
+                            for (int k=0;k<27;k++){
+                                hasil[k] = hasil[k] - solusi[j][k]*m.getElmt(i, j);
+                            }
+                        }
+                    }
+                }
+            }
+            if(found==-1){
+                if(Math.abs(m.getElmt(i, m.getCol()-1))>=1.00e-4){
+                    noSolution = true;
+                }
+            }
+            else{
+                solusi[found] = hasil;
+            } 
+        }
+        if (noSolution){
+            IO.writeFileString(namaFile, "SPL tidak memiliki solusi");
+        }
+        else{
+            for (int i=0;i<m.getCol()-1;i++){
+                IO.writeFileString(namaFile, "x" + (i+1) + " = " + ToString(solusi[i]));
+            }
+        }
+    }
+
     public static void SPLGaussJordan(Matrix m){
         String variable = "abcdefghijklmnopqrstuvwxyz";
         boolean noSolution = false;
@@ -267,6 +339,58 @@ public class SistemPersamaanLinear {
         else{
             for (int i=0;i<m.getCol()-1;i++){
                 System.out.println("x" + (i+1) + " = " + ToString(solusi[i]));
+            }
+        }
+    }
+
+    public static void FileSPLGaussJordan(Matrix m, String namaFile) {
+        String variable = "abcdefghijklmnopqrstuvwxyz";
+        boolean noSolution = false;
+        m = MatrixGaussJordan(m);
+        double[][] solusi = new double[27][27];
+        int variabel = 1;
+        for (int i=m.getRow()-1;i>=0;i--){
+            int found = -1;
+            double[] hasil = new double[27];
+            for (int j=0;j<m.getCol();j++){
+                if(Math.abs(m.getElmt(i, j))>=1.00e-4){
+                    if(j==m.getCol()-1){
+                        hasil[0] += m.getElmt(i, j);
+                    }
+                    else{
+                        if(IsEmpty(solusi[j])){
+                            if(found!=-1){
+                                solusi[j][variabel] = 1;
+                                hasil[variabel] = (-1)*m.getElmt(i, j);
+                                variabel+=1;
+                            }
+                            else{
+                                found = j;
+                            } 
+                        }
+                        else{
+                            for (int k=0;k<27;k++){
+                                hasil[k] = hasil[k] - solusi[j][k]*m.getElmt(i, j);
+                            }
+                        }
+                    }
+                }
+            }
+            if(found==-1){
+                if(Math.abs(m.getElmt(i, m.getCol()-1))>=1.00e-4){
+                    noSolution = true;
+                }
+            }
+            else{
+                solusi[found] = hasil;
+            } 
+        }
+        if (noSolution){
+            IO.writeFileString(namaFile, "SPL tidak memiliki solusi");
+        }
+        else{
+            for (int i=0;i<m.getCol()-1;i++){
+                IO.writeFileString(namaFile, "x" + (i+1) + " = " + ToString(solusi[i]));
             }
         }
     }

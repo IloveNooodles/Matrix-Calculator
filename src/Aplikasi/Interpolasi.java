@@ -3,6 +3,7 @@ package Aplikasi;
 import java.util.Scanner;
 
 import Matrix.Matrix;
+import Utility.IO;
 
 public class Interpolasi {
     public static Matrix masukkanInterpolasi(int n) {
@@ -21,6 +22,7 @@ public class Interpolasi {
 
         return a;
     }
+
     public static void keluarkanInterpolasi(Matrix a) {
         int n = a.getCol();
         Matrix b = new Matrix(a.getRow(), a.getCol());
@@ -34,6 +36,23 @@ public class Interpolasi {
             }
             else {
                 System.out.print(String.format("+ " + "%.4f", b.getElmt(k, n-1)) + "x^" + k);
+            }
+        }
+    }
+
+    public static void fileInterpolasi(Matrix a, String namaFile) {
+        int n = a.getCol();
+        Matrix b = new Matrix(a.getRow(), a.getCol());
+        b = SistemPersamaanLinear.MatrixGaussJordan(a);
+        for (int k=0;k<n-1;k++){
+            if(k==0){
+                IO.writeFileString(namaFile, String.format("%.4f", b.getElmt(k,n-1)));
+            }
+            else if(k==1){
+                IO.writeFileString(namaFile, String.format("+ " + "%.4f", b.getElmt(k, n-1)) + "x");
+            }
+            else {
+                IO.writeFileString(namaFile, String.format("+ " + "%.4f", b.getElmt(k, n-1)) + "x^" + k);
             }
         }
     }

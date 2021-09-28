@@ -1,6 +1,7 @@
 package Aplikasi;
 
 import Matrix.*;
+import Utility.*;
 import java.util.Scanner;
 
 public class RLB {
@@ -40,8 +41,7 @@ public class RLB {
     rlb = new Matrix();
     rlb = rlb.copyMatrix(Operation.augmentedMatrix(rlbX, rlbY));
 
-    return rlb;
-    // return SistemPersamaanLinear.MatrixGaussJordan(rlb);
+    return SistemPersamaanLinear.MatrixGaussJordan(rlb);
 
   }
 
@@ -57,11 +57,9 @@ public class RLB {
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < k + 1; j++) {
         if (j == k) {
-          // System.out.print("Nilai y ke-" + (i + 1) + " : ");
           elmt = sc.nextDouble();
           m.setElmt(i, j, elmt);
         } else {
-          // System.out.print("Nilai x" + (j + 1) + " ke-" + (i + 1) + " : ");
           elmt = sc.nextDouble();
           m.setElmt(i, j, elmt);
         }
@@ -86,9 +84,31 @@ public class RLB {
       y = 0;
       inputData.createMatrix();
       for (i = 0; i < m.getRow();i++) {
-        y += inputData.getElmt(1, i) * m.getElmt(i, m.getCol() - 1);
+        y += inputData.getElmt(0, i) * m.getElmt(i, m.getCol() - 1);
       }
       System.out.println("Prediksi nilai y dari regresi linear adalah : " + y);
+      x--;
+    }
+    sc.close();
+  }
+
+  public static void fileRLB(Matrix m, int x, String namaFile) {
+    /* KAMUS */
+    int i;
+    double y;
+    Matrix inputData;
+
+    /* ALGORITMA */
+    Scanner sc = new Scanner(System.in);
+    inputData = new Matrix(1, m.getRow());
+
+    while (x > 0) {
+      y = 0;
+      inputData.createMatrix();
+      for (i = 0; i < m.getRow();i++) {
+        y += inputData.getElmt(0, i) * m.getElmt(i, m.getCol() - 1);
+      }
+      IO.writeFileString(namaFile, Double.toString(y));
       x--;
     }
     sc.close();

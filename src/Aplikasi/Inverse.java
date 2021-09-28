@@ -2,6 +2,7 @@ package Aplikasi;
 
 import Matrix.Matrix;
 import Matrix.Operation;
+import Utility.IO;
 
 public class Inverse {
     public static Matrix matrikskofaktor(Matrix a){
@@ -43,6 +44,15 @@ public class Inverse {
       } else {
         System.out.println("Balikan dari matriks tersebut adalah: ");
         n.displayMatrix();
+      }
+    }
+
+    public static void fileInverseAdjoint(Matrix m, String namaFile) {
+      Matrix n = inverseAdjoint(m);
+      if (n == null) {
+        IO.writeFileString(namaFile, "Matriks tidak mempunyai balikan");
+      } else {
+        IO.writeFileMatrixSqrt(namaFile, m);
       }
     }
 
@@ -101,6 +111,15 @@ public class Inverse {
       } else {
         System.out.println("Balikan dari matriks tersebut adalah: ");
         n.displayMatrix();
+      }
+    }
+
+    public static void fileGaussJordan(Matrix m, String namaFile) {
+      Matrix n = eliminasiGaussJordan(m);
+      if (n == null) {
+        IO.writeFileString(namaFile, "Matriks tidak mempunyai balikan");
+      } else {
+        IO.writeFileMatrixSqrt(namaFile, m);
       }
     }
 }

@@ -10,6 +10,8 @@ public class Menu {
 
   private static Matrix m;
 
+  private static String namaFile;
+
   public static void menuLoop(){
     char Y;
     do {
@@ -35,18 +37,19 @@ public class Menu {
     System.out.println("7. Keluar");
     System.out.print("Masukan pilihan: ");
 
-    int i = sc.nextInt();
+    int i, q;
+
+    i = sc.nextInt();
     switch (i) {
       case 1:
         input();
-        i = sc.nextInt();
-        switch (i) {
+        q = sc.nextInt();
+        switch (q) {
           case 1:
-            io();
+            inputFileMatrix();
             break;
           case 2:
             inputInterpolasi();
-            InterpolasiKeyboard();
             break;
           default:
             System.out.println("\nMohon masukan input yang benar!");
@@ -55,10 +58,10 @@ public class Menu {
         break;
       case 2:
         input();
-        i = sc.nextInt();
-        switch (i) {
+        q = sc.nextInt();
+        switch (q) {
           case 1:
-            io();
+            inputFileMatrix();
             break;
           case 2:
             inputRegresi();
@@ -70,14 +73,13 @@ public class Menu {
         break;
       case 3:
         input();
-        i = sc.nextInt();
-        switch (i) {
+        q = sc.nextInt();
+        switch (q) {
           case 1:
-            io();
+            inputFileSqrtMatrix();
             break;
           case 2:
-            inputSqMatrix();
-            DeterminanKeyboard();
+            inputSqrtMatrix();
             break;
           default:
             System.out.println("\nMohon masukan input yang benar!");
@@ -86,14 +88,13 @@ public class Menu {
         break;
       case 4:
         input();
-        i = sc.nextInt();
-        switch (i) {
+        q = sc.nextInt();
+        switch (q) {
           case 1:
-            io();
+            inputFileSqrtMatrix();
             break;
           case 2:
-            inputSqMatrix();
-            InverseKeyboard();
+            inputSqrtMatrix();
             break;
           default:
             System.out.println("\nMohon masukan input yang benar!");
@@ -102,14 +103,13 @@ public class Menu {
         break;
       case 5:
         input();
-        i = sc.nextInt();
-        switch (i) {
+        q = sc.nextInt();
+        switch (q) {
           case 1:
-            io();
+            inputFileMatrix();
             break;
           case 2:
             inputMatrix();
-            SPLKeyboard();
             break;
           default:
             System.out.println("\nMohon masukan input yang benar!");
@@ -118,14 +118,13 @@ public class Menu {
         break;
       case 6:
         input();
-        i = sc.nextInt();
-        switch (i) {
+        q = sc.nextInt();
+        switch (q) {
           case 1:
-            io();
+            inputFileMatrix();
             break;
           case 2:
             inputTranspose();
-            TransposeKeyboard();
             break;
           default:
             System.out.println("\nMohon masukan input yang benar!");
@@ -137,6 +136,101 @@ public class Menu {
       default:
         System.out.println("\nMohon masukan input yang benar!");
         break;
+    }
+
+    switch (i) {
+      case 1:
+        output();
+        q = sc.nextInt();
+        switch (q) {
+          case 1:
+            InterpolasiFile();
+            break;
+          case 2:
+            InterpolasiKeyboard();
+            break;
+          default:
+            System.out.println("\nMohon masukan input yang benar!");
+            break;
+        }
+        break;
+      case 2:
+        output();
+        q = sc.nextInt();
+        switch (q) {
+          case 1:
+            RegresiFile();
+            break;
+          case 2:
+            RegresiKeyboard();
+            break;
+          default:
+            System.out.println("\nMohon masukan input yang benar!");
+            break;
+        }
+        break;
+      case 3:
+        output();
+        q = sc.nextInt();
+        switch (q) {
+          case 1:
+            DeterminanFile();
+            break;
+          case 2:
+            DeterminanKeyboard();
+            break;
+          default:
+            System.out.println("\nMohon masukan input yang benar!");
+            break;
+        }
+        break;
+      case 4:
+        output();
+        q = sc.nextInt();
+        switch (q) {
+          case 1:
+            InverseFile();
+            break;
+          case 2:
+            InverseKeyboard();
+            break;
+          default:
+            System.out.println("\nMohon masukan input yang benar!");
+            break;
+        }
+        break;
+      case 5:
+        output();
+        q = sc.nextInt();
+        switch (q) {
+          case 1:
+            SPLFile();
+            break;
+          case 2:
+            SPLKeyboard();
+            break;
+          default:
+            System.out.println("\nMohon masukan input yang benar!");
+            break;
+        }
+        break;
+      case 6:
+        output();
+        q = sc.nextInt();
+        switch (q) {
+          case 1:
+            TransposeFile();
+            break;
+          case 2:
+            TransposeKeyboard();
+            break;
+          default:
+            System.out.println("\nMohon masukan input yang benar!");
+            break;
+        }
+        break;
+      case 7:
+        exit();
     }
   }
 
@@ -169,7 +263,7 @@ public class Menu {
     m.createMatrix();
   }
 
-  public static void inputSqMatrix(){
+  public static void inputSqrtMatrix(){
     System.out.println("");
     System.out.println("Akan dibuat matrix berukuran n x n");
     System.out.print("Masukan n: "); 
@@ -185,8 +279,9 @@ public class Menu {
     System.out.println("Akan dibuat interpolasi dengan pasangan sebanyak n buah");
     System.out.print("Masukan n: ");
     int n = sc.nextInt();
+    m = new Matrix(n, n + 1);
+
     System.out.println("Silahkan masukan setiap pasangan: ");
-    m = new Matrix(n, n+1);
     m = Interpolasi.masukkanInterpolasi(n);
   }
 
@@ -197,8 +292,9 @@ public class Menu {
     int n = sc.nextInt();
     System.out.print("Masukan k: ");
     int k = sc.nextInt();
-    System.out.println("Silahkan masukkan data:");
     m = new Matrix(n, k + 1);
+
+    System.out.println("Silahkan masukkan data:");
     m = RLB.inputRLB(n, k);
   }
 
@@ -301,13 +397,13 @@ public class Menu {
 
   public static void RegresiKeyboard() {
     System.out.println("");
-    System.out.print("Masukkan jumlah titik data yang ingin dipredikasi: ");
+    System.out.print("Masukkan jumlah titik data yang ingin diprediksi: ");
     int x = sc.nextInt();
 
     RLB.outputRLB(m, x);
   }
 
-  public static void io() {
+  public static void inputFileMatrix() {
     System.out.println("");
     System.out.println("Pilih file yang akan dibaca!");
     IO.printListDir();
@@ -315,7 +411,126 @@ public class Menu {
     File[] listFiles = IO.getListDir();
     System.out.print("Masukan pilihan: ");
     int q = sc.nextInt();
+
+    m = new Matrix();
     m = IO.readMatrix(listFiles[q - 1].getName());
+  }
+
+  public static void inputFileSqrtMatrix() {
+    System.out.println("");
+    System.out.println("Pilih file yang akan dibaca!");
+    IO.printListDir();
+    
+    File[] listFiles = IO.getListDir();
+    System.out.print("Masukan pilihan: ");
+    int q = sc.nextInt();
+
+    m = new Matrix();
+    m = IO.readSqrtMatrix(listFiles[q - 1].getName());
+  }
+
+  public static void outputFile() {
+    System.out.println("");
+    System.out.print("Masukan nama file output: ");
+
+    namaFile = new String();
+    namaFile = sc.nextLine();
+  }
+
+  public static void InterpolasiFile() {
+    outputFile();
+    Interpolasi.fileInterpolasi(m, namaFile);
+  }
+
+  public static void RegresiFile() {
+    outputFile();
+    System.out.println("");
+    System.out.print("Masukkan jumlah titik data yang ingin diprediksi: ");
+    int x = sc.nextInt();
+
+    RLB.fileRLB(m, x, namaFile);
+  }
+
+  public static void DeterminanFile() {
+    outputFile();
+    System.out.println("");
+    System.out.println("###### Pilih metode yang ingin digunakan ######");
+    System.out.println("1. Metode Eliminasi Gauss");
+    System.out.println("2. Metode Ekspansi Kofaktor");
+    System.out.println("3. Metode Sarrus");
+    System.out.print("Masukan pilihan: ");
+    int i = sc.nextInt();
+
+    switch (i) {
+      case 1:
+        Determinan.fileEkspansiKofaktor(m, namaFile);
+        break;
+      case 2:
+        Determinan.fileOBE(m, namaFile);
+        break;
+      case 3:
+        Determinan.fileSarrus(m, namaFile);
+        break;
+      default:
+        System.out.println("\nMohon masukan input yang benar!");
+        break;
+    }
+  }
+
+  public static void InverseFile() {
+    outputFile();
+    System.out.println("");
+    System.out.println("###### Pilih metode yang ingin digunakan ######");
+    System.out.println("1. Metode Eliminasi Gauss-Jordan");
+    System.out.println("2. Metode Adjoint");
+    System.out.print("Masukan pilihan: ");
+    int i = sc.nextInt();
+
+    switch (i) {
+      case 1:
+        Inverse.fileGaussJordan(m, namaFile);
+        break;
+      case 2:
+        Inverse.fileInverseAdjoint(m, namaFile);
+        break;
+      default:
+        System.out.println("\nMohon masukan input yang benar!");
+        break;
+    }
+  }
+
+  public static void SPLFile() {
+    outputFile();
+    System.out.println("");
+    System.out.println("###### Pilih metode yang ingin digunakan ######");
+    System.out.println("1. Metode Eliminasi Gauss");
+    System.out.println("2. Metode Eliminasi Gauss-Jordan");
+    System.out.println("3. Metode Matriks Balikan");
+    System.out.println("4. Kaidah Cramer");
+    System.out.print("Masukan pilihan: ");
+    int i = sc.nextInt();
+    switch (i) {
+      case 1:
+        SistemPersamaanLinear.FileSPLGauss(m, namaFile);
+        break;
+      case 2:
+        SistemPersamaanLinear.FileSPLGaussJordan(m, namaFile);
+        break;
+      case 3:
+        SistemPersamaanLinear.FileSPLinverse(m, namaFile);
+        break;
+      case 4:
+        Crammer.FileCrammer(m, namaFile);
+        break;
+      default:
+        System.out.println("\nMohon masukan input yang benar!");
+        break;
+    }
+  }
+
+  public static void TransposeFile() {
+    outputFile();
+    IO.writeFileMatrix(namaFile, Operation.transpose(m));
   }
 
   public static void exit(){

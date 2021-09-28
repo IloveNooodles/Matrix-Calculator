@@ -4,6 +4,7 @@ import java.lang.Math;
 
 import Matrix.Matrix;
 import Matrix.Operation;
+import Utility.IO;
 
 public class Determinan {
     public static double kofaktor(Matrix m, int a, int b) {
@@ -65,6 +66,10 @@ public class Determinan {
         System.out.println("Determinant matriks tersebut adalah " + ekspansiKofaktor(m));
     }
 
+    public static void fileEkspansiKofaktor(Matrix m, String namaFile) {
+        IO.writeFileString(namaFile, Double.toString(ekspansiKofaktor(m)));
+    }
+
     public static double determinanOBE(Matrix m){
         Matrix n = new Matrix();
         n = n.copyMatrix(m);
@@ -95,6 +100,10 @@ public class Determinan {
         System.out.println("Deteriman matriks tersebut adalah " + determinanOBE(m));
     }
 
+    public static void fileOBE(Matrix m, String namaFile) {
+        IO.writeFileString(namaFile, Double.toString(determinanOBE(m)));
+    }
+
     public static void displaySarrus(Matrix m) {
         double det = 0;
         if(m.isSquare()){
@@ -110,6 +119,25 @@ public class Determinan {
         }
         else{
             System.out.println("Matrix tidak memiliki determinan");
+            return;
+        }
+    }
+
+    public static void fileSarrus(Matrix m, String namaFile) {
+        double det = 0;
+        if(m.isSquare()){
+            if(m.getRow()==3){
+                for (int i=0;i<3;i++){
+                    det +=m.getElmt(0,i)*(m.getElmt(1,(i+1)%3)*m.getElmt(2,(i+2)%3)-m.getElmt(1,(i+2)%3)*m.getElmt(2,(i+1)%3));
+                }
+                IO.writeFileString(namaFile, Double.toString(det));
+                return;
+            }
+            IO.writeFileString(namaFile, "Ukuran matrix tidak 3x3, metode Sarrus tidak dapat digunakan");
+            return;
+        }
+        else{
+            IO.writeFileString(namaFile, "Matrix tidak memiliki determinan");
             return;
         }
     }
