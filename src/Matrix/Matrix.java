@@ -48,10 +48,12 @@ public class Matrix {
 
   public void setRow(int row){
     this.row = row;
+    this.mtxr = new Double [this.row][this.col];
   }
 
   public void setCol(int col){
     this.col = col;
+    this.mtxr = new Double [this.row][this.col];
   }
 
   public void setElmt(int row, int col, double elmt){
