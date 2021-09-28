@@ -6,15 +6,11 @@ import Matrix.*;
 import Aplikasi.*;
 
 public class Menu {
-  private Scanner sc = new Scanner(System.in);
+  private static Scanner sc = new Scanner(System.in);
 
-  private Matrix m;
+  private static Matrix m = new Matrix(100, 100);
 
-  public Menu() {
-    m = new Matrix(100, 100);
-  }
-
-  public void menuLoop(){
+  public static void menuLoop(){
     char Y;
     do {
       mainMenu();
@@ -25,7 +21,7 @@ public class Menu {
     exit();
   }
 
-  public void mainMenu() {
+  public static void mainMenu() {
 
     System.out.println("");
     System.out.println("SELAMAT DATANG DI MATRIX CALCULATOR");
@@ -145,7 +141,7 @@ public class Menu {
     }
   }
 
-  public void input() {
+  public static void input() {
     System.out.println("");
     System.out.println("###### Pilih jenis input ######");
     System.out.println("1. File");
@@ -153,7 +149,7 @@ public class Menu {
     System.out.print("Masukan pilihan: ");
   }
 
-  public void output() {
+  public static void output() {
     System.out.println("");
     System.out.println("###### Pilih jenis output ######");
     System.out.println("1. File");
@@ -161,7 +157,7 @@ public class Menu {
     System.out.print("Masukan pilihan: ");
   }
 
-  public void inputMatrix(){
+  public static void inputMatrix(){
     System.out.println("");
     System.out.println("Akan dibuat matrix berukuran m x n");
     System.out.print("Masukan m: ");
@@ -176,7 +172,7 @@ public class Menu {
     m.createMatrix();
   }
 
-  public void inputSqMatrix(){
+  public static void inputSqMatrix(){
     System.out.println("");
     System.out.println("Akan dibuat matrix berukuran n x n");
     System.out.print("Masukan n: "); 
@@ -189,7 +185,7 @@ public class Menu {
     m.createMatrix();
   }
 
-  public void inputInterpolasi(){
+  public static void inputInterpolasi(){
     System.out.println("");
     System.out.println("Akan dibuat interpolasi dengan pasangan sebanyak n buah");
     System.out.print("Masukan n: ");
@@ -199,7 +195,7 @@ public class Menu {
     m = Interpolasi.masukkanInterpolasi(n);
   }
 
-  public void inputRegresi(){
+  public static void inputRegresi(){
     System.out.println("");
     System.out.println("Akan dibuat RLB (Regresi Linear Berganda) dengan n buah persamaan dengan k peubah");
     System.out.print("Masukan n:");
@@ -211,7 +207,7 @@ public class Menu {
     m = RLB.inputRLB(n, k);
   }
 
-  public void inputTranspose() {
+  public static void inputTranspose() {
     System.out.println("");
     System.out.println("Akan dibuat transpose matriks n x n");
     System.out.print("Masukan n: ");
@@ -224,7 +220,7 @@ public class Menu {
     m.createMatrix();
   }
 
-  public void SPLKeyboard(){
+  public static void SPLKeyboard(){
     System.out.println("");
     System.out.println("###### Pilih metode yang ingin digunakan ######");
     System.out.println("1. Metode Eliminasi Gauss");
@@ -253,7 +249,7 @@ public class Menu {
     }
   }
 
-  public void DeterminanKeyboard() {
+  public static void DeterminanKeyboard() {
     System.out.println("");
     System.out.println("###### Pilih metode yang ingin digunakan ######");
     System.out.println("1. Metode Eliminasi Gauss");
@@ -278,7 +274,7 @@ public class Menu {
     }
   }
 
-  public void InverseKeyboard() {
+  public static void InverseKeyboard() {
     System.out.println("");
     System.out.println("###### Pilih metode yang ingin digunakan ######");
     System.out.println("1. Metode Eliminasi Gauss-Jordan");
@@ -299,19 +295,19 @@ public class Menu {
     }
   }
 
-  public void TransposeKeyboard() {
+  public static void TransposeKeyboard() {
     System.out.println("");
     System.out.println("Transpose dari matriks tersbeut adalah: ");
     Operation.transpose(m).displayMatrix();
   }
 
-  public void InterpolasiKeyboard() {
+  public static void InterpolasiKeyboard() {
     System.out.println("");
     System.out.println("Hasil interpolasi data tersebut adalah: ");
     Interpolasi.keluarkanInterpolasi(m);
   }
 
-  public void RegresiKeyboard() {
+  public static void RegresiKeyboard() {
     System.out.println("");
     System.out.print("Masukkan jumlah titik data yang ingin dipredikasi: ");
     int x = sc.nextInt();
@@ -319,7 +315,7 @@ public class Menu {
     RLB.outputRLB(m, x);
   }
 
-  public void io(){
+  public static void io(){
     System.out.println("Pilih file yang akan dibaca!");
     IO.printListDir();
 
@@ -332,7 +328,7 @@ public class Menu {
     m = IO.readMatrix(listFiles[q - 1].getName());
   }
 
-  public void exit(){
+  public static void exit(){
     System.out.println("\nTerima kasih telah menggunakan matrix calculator!");
     sc.close();
     System.exit(0);
