@@ -20,7 +20,7 @@ public class RLB {
           rlbX.setElmt(i, j, n);
         }else if(i == 0){
           rlbX.setElmt(i, j, Operation.sumCol(m, j-1));
-        }else if(i != 0 && j == 0){
+        }else if(j == 0){
           rlbX.setElmt(i, j, Operation.sumCol(m, i-1));
         }else {
           rlbX.setElmt(i, j, Operation.sumColTCol(m, i-1, j-1));
@@ -70,5 +70,27 @@ public class RLB {
 
     sc.close();
     return convertRLBMatrix(m);
+  }
+
+  public static void outputRLB(Matrix m, int x) {
+    /* KAMUS */
+    int i;
+    double y;
+    Matrix inputData;
+
+    /* ALGORITMA */
+    Scanner sc = new Scanner(System.in);
+    inputData = new Matrix(1, m.getRow());
+
+    while (x > 0) {
+      y = 0;
+      inputData.createMatrix();
+      for (i = 0; i < m.getRow();i++) {
+        y += inputData.getElmt(1, i) * m.getElmt(i, m.getCol() - 1);
+      }
+      System.out.println("Prediksi nilai y dari regresi linear adalah : " + y);
+      x--;
+    }
+    sc.close();
   }
 }
