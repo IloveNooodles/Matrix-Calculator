@@ -102,9 +102,11 @@ public class SistemPersamaanLinear {
                 }
 
                 Operation.rowReduction(n, row, i, j);
+                n.setPrecision(4);
             }
 
             Operation.rowTimesK(n, 1 / n.getElmt(row, j), row);
+            n.setPrecision(4);
 
             row++;
         }
