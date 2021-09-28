@@ -52,7 +52,7 @@ public class SistemPersamaanLinear {
                 ans = String.format("%.2f", m[0]);
             }
             else{
-                if(Math.abs(m[0])>=1.00e-4){
+                if(m[0]>=1.00e-4){
                     ans += " + " + String.format("%.2f", m[0]);
                 }
                 else{
@@ -155,9 +155,9 @@ public class SistemPersamaanLinear {
                 utama = utama + 1;
             }
             if (utama==n.getRow()-1){
-                for (int x=i+1;i<n.getCol();i++){
-                    if(Math.abs(n.getElmt(utama, i))>1.00e-4){
-                        Operation.rowTimesK(n, 1/(n.getElmt(utama, i)), utama);
+                for (int x=i+1;x<n.getCol();x++){
+                    if(Math.abs(n.getElmt(utama, x))>1.00e-4){
+                        Operation.rowTimesK(n, 1/(n.getElmt(utama, x)), utama);
                         break;
                     }
                 }
@@ -212,13 +212,8 @@ public class SistemPersamaanLinear {
             System.out.println("SPL tidak memiliki solusi");
         }
         else{
-            for (int i=0;i<solusi.length;i++){
-                if(IsEmpty(solusi[i])){
-                    continue;
-                }
-                else{
-                    System.out.println("x" + (i+1) + " = " + ToString(solusi[i]));
-                }
+            for (int i=0;i<m.getCol()-1;i++){
+                System.out.println("x" + (i+1) + " = " + ToString(solusi[i]));
             }
         }
     }
@@ -269,13 +264,8 @@ public class SistemPersamaanLinear {
             System.out.println("SPL tidak memiliki solusi");
         }
         else{
-            for (int i=0;i<solusi.length;i++){
-                if(IsEmpty(solusi[i])){
-                    continue;
-                }
-                else{
-                    System.out.println("x" + (i+1) + " = " + ToString(solusi[i]));
-                }
+            for (int i=0;i<m.getCol()-1;i++){
+                System.out.println("x" + (i+1) + " = " + ToString(solusi[i]));
             }
         }
     }

@@ -23,7 +23,6 @@ public class Menu {
 
   public static void mainMenu() {
     m = new Matrix();
-
     System.out.println("");
     System.out.println("SELAMAT DATANG DI MATRIX CALCULATOR");
     System.out.println("###### MENU ######");
@@ -164,9 +163,7 @@ public class Menu {
     int jumlahBaris = sc.nextInt();
     System.out.print("Masukan n: ");
     int jumlahKolom = sc.nextInt();
-
-    m.setRow(jumlahBaris);
-    m.setCol(jumlahKolom);
+    m = new Matrix(jumlahBaris, jumlahKolom);
 
     System.out.println("Silahkan masukan setiap element matrix: ");
     m.createMatrix();
@@ -177,9 +174,7 @@ public class Menu {
     System.out.println("Akan dibuat matrix berukuran n x n");
     System.out.print("Masukan n: "); 
     int n = sc.nextInt();
-
-    m.setRow(n);
-    m.setCol(n);
+    m = new Matrix(n, n);
 
     System.out.println("Silahkan masukan setiap element matrix: ");
     m.createMatrix();
@@ -191,7 +186,7 @@ public class Menu {
     System.out.print("Masukan n: ");
     int n = sc.nextInt();
     System.out.println("Silahkan masukan setiap pasangan: ");
-
+    m = new Matrix(n, n+1);
     m = Interpolasi.masukkanInterpolasi(n);
   }
 
@@ -203,7 +198,7 @@ public class Menu {
     System.out.print("Masukan k: ");
     int k = sc.nextInt();
     System.out.println("Silahkan masukkan data:");
-
+    Matrix m = new Matrix(n, k + 1);
     m = RLB.inputRLB(n, k);
   }
 
@@ -212,9 +207,7 @@ public class Menu {
     System.out.println("Akan dibuat transpose matriks n x n");
     System.out.print("Masukan n: ");
     int n = sc.nextInt();
-
-    m.setRow(n);
-    m.setCol(n);
+    m = new Matrix(n, n);
 
     System.out.println("Silahkan masukan setiap element matrix: ");
     m.createMatrix();
@@ -229,7 +222,6 @@ public class Menu {
     System.out.println("4. Kaidah Cramer");
     System.out.print("Masukan pilihan: ");
     int i = sc.nextInt();
-
     switch (i) {
       case 1:
         SistemPersamaanLinear.SPLGauss(m);
