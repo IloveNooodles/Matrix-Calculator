@@ -289,7 +289,7 @@ public class Menu {
 
   public static void TransposeKeyboard() {
     System.out.println("");
-    System.out.println("Transpose dari matriks tersbeut adalah: ");
+    System.out.println("Transpose dari matriks tersebut adalah: ");
     Operation.transpose(m).displayMatrix();
   }
 
@@ -301,18 +301,20 @@ public class Menu {
 
   public static void RegresiKeyboard() {
     System.out.println("");
+    System.out.print("Masukkan jumlah titik data yang ingin dipredikasi: ");
+    int x = sc.nextInt();
+
+    RLB.outputRLB(m, x);
   }
 
-  public static void io(){
+  public static void io() {
+    System.out.println("");
     System.out.println("Pilih file yang akan dibaca!");
     IO.printListDir();
-
+    
     File[] listFiles = IO.getListDir();
-
     System.out.print("Masukan pilihan: ");
-
     int q = sc.nextInt();
-
     m = IO.readMatrix(listFiles[q - 1].getName());
   }
 
