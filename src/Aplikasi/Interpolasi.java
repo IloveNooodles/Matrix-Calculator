@@ -23,14 +23,17 @@ public class Interpolasi {
     }
     public static void keluarkanInterpolasi(Matrix a) {
         int n = a.getCol();
-        Matrix b = new Matrix();
+        Matrix b = new Matrix(a.getRow(), a.getCol());
         b = SistemPersamaanLinear.MatrixGaussJordan(a);
-        for (int k=0;k<n;k++){
+        for (int k=0;k<n-1;k++){
             if(k==0){
-                System.out.print(String.format("%.4f", b.getElmt(k,n)));
+                System.out.print(String.format("%.4f", b.getElmt(k,n-1)));
+            }
+            else if(k==1){
+                System.out.print(String.format("+ " + "%.4f", b.getElmt(k, n-1)) + "x");
             }
             else {
-                System.out.print(String.format("+ " + "%.4f", b.getElmt(k, n)) + "x^" + k);
+                System.out.print(String.format("+ " + "%.4f", b.getElmt(k, n-1)) + "x^" + k);
             }
         }
     }
