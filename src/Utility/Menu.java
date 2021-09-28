@@ -12,12 +12,12 @@ public class Menu {
 
   public static void menuLoop(){
     char Y;
-    System.out.println("");
-    System.out.print("Apakah ingin melanjutkan? [Y/N]: ");
-    Y = sc.next().charAt(0);
-    while(Y == 'Y'){
+    do {
       mainMenu();
-    }
+      System.out.println("");
+      System.out.print("Apakah ingin melanjutkan? [Y/N]: ");
+      Y = sc.next().charAt(0);
+    } while (Y == 'Y');
     exit();
   }
 
@@ -198,7 +198,7 @@ public class Menu {
     System.out.print("Masukan k: ");
     int k = sc.nextInt();
     System.out.println("Silahkan masukkan data:");
-    Matrix m = new Matrix(n, k + 1);
+    m = new Matrix(n, k + 1);
     m = RLB.inputRLB(n, k);
   }
 
