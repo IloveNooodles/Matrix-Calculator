@@ -23,9 +23,11 @@ public class Interpolasi {
         return a;
     }
 
-    public static void keluarkanInterpolasi(Matrix a) {
+    public static Matrix keluarkanInterpolasi(Matrix a) {
+        Scanner sc = new Scanner(System.in);
         int n = a.getCol();
         Matrix b = new Matrix(a.getRow(), a.getCol());
+        Matrix ans = new Matrix(a.getRow(),1);
         b = SistemPersamaanLinear.MatrixGaussJordan(a);
         for (int k=0;k<n-1;k++){
             if(k==0){
@@ -38,6 +40,10 @@ public class Interpolasi {
                 System.out.print(String.format("+ " + "%.4f", b.getElmt(k, n-1)) + "x^" + k);
             }
         }
+        for (int i=0;i<a.getRow();i++){
+            ans.setElmt(i, 0, b.getElmt(i, n-1));
+        }
+        return ans;
     }
 
     public static void fileInterpolasi(Matrix a, String namaFile) {
