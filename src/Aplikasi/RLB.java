@@ -40,8 +40,8 @@ public class RLB {
 
     rlb = new Matrix();
     rlb = rlb.copyMatrix(Operation.augmentedMatrix(rlbX, rlbY));
-    return rlb;
-    // return SistemPersamaanLinear.MatrixGaussJordan(rlb);
+    // return rlb;
+    return SistemPersamaanLinear.MatrixGaussJordan(rlb);
 
   }
 
@@ -74,11 +74,12 @@ public class RLB {
     /* KAMUS */
     int i;
     Matrix n;
-
+    double[] ans = new double[m.getRow()];
     /* ALGORITMA */
     n = new Matrix(m.getRow(), m.getCol());
     n = convertRLBMatrix(m);
 
+    System.out.println("Fungsi Regresi Linear Berganda: ");
     System.out.print("y = ");
     for (i = 0; i < n.getCol() - 1; i++) {
       if (n.getElmt(i, n.getCol() - 1) == 0) {
@@ -91,30 +92,30 @@ public class RLB {
         System.out.print(String.format(n.getElmt(i - 1, n.getCol() - 1) == 0 ? "" : " + " + "(%.4f)", n.getElmt(i, n.getCol() - 1)) + "x" + i);
       }
     }
+
   }
 
   public static void outputRLB(Matrix m, int x) {
     /* KAMUS */
     int i;
     double y;
-    Matrix inputData, n;
-
+    Matrix n;
+    Scanner sc = new Scanner(System.in);
     /* ALGORITMA */
     
     n = new Matrix(m.getRow(), m.getCol());
     n = convertRLBMatrix(m);
+    
+    System.out.println("\nAkan dicek prediksi nilai y dengan memasukan nilai x");
 
-    inputData = new Matrix(1, n.getRow());
-
-    while (x > 0) {
-      inputData.createMatrix();
-      y = n.getElmt(0, n.getCol() - 1);
-      for (i = 1; i < n.getRow();i++) {
-        y += inputData.getElmt(0, i - 1) * n.getElmt(i, n.getCol() - 1);
-      }
-      System.out.println("Prediksi nilai y dari regresi linear adalah : " + String.format("%.4f", y));
-      x--;
+    y = n.getElmt(0, n.getCol() - 1);
+    for(i = 0; i < x; i++){
+      System.out.print(String.format("Masukan nilai x%d: ", i+1));
+      double b = sc.nextDouble();
+      y += b*n.getElmt(i+1, n.getCol() - 1);
     }
+    System.out.println(String.format("\nPrediksi nilai y dari regresi linear adalah : %,.4f", y));
+    sc.close();
   }
 
   public static void fileRLB(Matrix m, int x, String namaFile) {
