@@ -192,6 +192,8 @@ public class SistemPersamaanLinear {
     public static void SPLGauss(Matrix m){
         String variable = "abcdefghijklmnopqrstuvwxyz";
         boolean noSolution = false;
+        Matrix n = new Matrix();
+        n = n.copyMatrix(m);
         m = matrixGauss(m);
         double[][] solusi = new double[27][27];
         int variabel = 1;
@@ -236,7 +238,22 @@ public class SistemPersamaanLinear {
         }
         else{
             for (int i=0;i<m.getCol()-1;i++){
-                System.out.println("x" + (i+1) + " = " + ToString(solusi[i]));
+                if(ToString(solusi[i])!="0"){
+                    System.out.println("x" + (i+1) + " = " + ToString(solusi[i]));
+                }
+                else{
+                    for (int k=0;k<n.getRow();k++){
+                        if(n.getElmt(k,i)!=0){
+                            System.out.println("x" + (i+1) + " = " + ToString(solusi[i]));
+                            break;
+                        }
+                        else if(k==n.getRow()-1){
+                            solusi[i][variabel]=1;
+                            variabel++;
+                            System.out.println("x" + (i+1) + " = " + ToString(solusi[i]));
+                        }
+                    }
+                }
             }
         }
     }
@@ -298,7 +315,9 @@ public class SistemPersamaanLinear {
     public static void SPLGaussJordan(Matrix m){
         String variable = "abcdefghijklmnopqrstuvwxyz";
         boolean noSolution = false;
-        m = MatrixGaussJordan(m);
+        Matrix n = new Matrix();
+        n = n.copyMatrix(m);
+        m = matrixGauss(m);
         double[][] solusi = new double[27][27];
         int variabel = 1;
         for (int i=m.getRow()-1;i>=0;i--){
@@ -342,7 +361,22 @@ public class SistemPersamaanLinear {
         }
         else{
             for (int i=0;i<m.getCol()-1;i++){
-                System.out.println("x" + (i+1) + " = " + ToString(solusi[i]));
+                if(ToString(solusi[i])!="0"){
+                    System.out.println("x" + (i+1) + " = " + ToString(solusi[i]));
+                }
+                else{
+                    for (int k=0;k<n.getRow();k++){
+                        if(n.getElmt(k,i)!=0){
+                            System.out.println("x" + (i+1) + " = " + ToString(solusi[i]));
+                            break;
+                        }
+                        else if(k==n.getRow()-1){
+                            solusi[i][variabel]=1;
+                            variabel++;
+                            System.out.println("x" + (i+1) + " = " + ToString(solusi[i]));
+                        }
+                    }
+                }
             }
         }
     }
