@@ -4,6 +4,30 @@ import Matrix.*;
 import Utility.IO;
 
 public class Crammer {
+  
+  public static boolean isDetZero(Matrix m){
+    return (Determinan.ekspansiKofaktor(m) == 0);
+  }
+
+  //NOTE asumsi determinan ga nol
+  public static Matrix matrixCrammer(Matrix m){
+    Matrix a,b;
+    a = new Matrix();
+    b = new Matrix();
+    
+    Operation.splitAugmentedMatrix(m, a, b);
+
+    double temp = Determinan.ekspansiKofaktor(a);
+    Matrix ans = new Matrix(a.getRow(), 1);
+    for(int i = 0; i < a.getCol(); i++){
+      Matrix c = new Matrix();
+      c = c.copyMatrix(a);
+      Operation.setCol(c, b, i, 0);
+      ans.setElmt(i, 0, Determinan.ekspansiKofaktor(c)/temp);
+    }
+    return ans;
+  }
+
   public static void crammer(Matrix m){
     Matrix a, b;
 

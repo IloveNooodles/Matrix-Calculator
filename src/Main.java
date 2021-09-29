@@ -1,19 +1,25 @@
+import Aplikasi.Crammer;
+import Aplikasi.Interpolasi;
+import Matrix.Matrix;
 import Utility.*;
 import Aplikasi.RLB;
 import Matrix.*;
 
 public class Main{
   public static void main(String[] args) {
-    // Menu.menuLoop();
-    Matrix m = new Matrix();
-    m = IO.readMatrix("7.txt");
-    // m = RLB.convertRLBMatrix(m);
-    // m.displayMatrix();
-    RLB.keluarkanRLB(m);
-    RLB.outputRLB(m, 3);
-    // m = IO.readMatrix("regresi.txt");
-    // m.displayMatrix();
-    // m = RLB.convertRLBMatrix(m);
-    // m.displayMatrix();
+    Matrix m = IO.readMatrix("6_b.txt");
+    m.displayMatrix();
+    Matrix c = new Matrix();
+    Matrix ans = new Matrix();
+    ans = Interpolasi.MatrixToMatrixInterpolasi(m);
+    // ans.displayMatrix();
+
+    // ans = Crammer.matrixCrammer(ans);
+    // ans.displayMatrix();
+    Interpolasi.keluarkanInterpolasiCrammer(ans);
+    System.out.println("\n");
+    // Interpolasi.outputInterpolasi(ans, 5.806);
+    // c = Interpolasi.keluarkanInterpolasi(m);
+    
   }
 }

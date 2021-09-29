@@ -19,16 +19,28 @@ public class Interpolasi {
             }
         }
         sc.close();
-
         return a;
     }
 
+    //NOTE ini buat ngerubah dari bentuk file ke matrix interpolasi
+    public static Matrix MatrixToMatrixInterpolasi(Matrix m){
+      int n = m.getRow();
+      Matrix b = new Matrix(n, n+1);
+      for(int i = 0; i < n; i++){
+        b.setElmt(i, n, m.getElmt(i, m.getCol() - 1));
+        for(int j = 0; j < n; j++){
+          b.setElmt(i, j, Math.pow(m.getElmt(i, 0), j));
+        }
+      }
+      return b;
+    }
+    //NOTE ini cuma buat ngeprint fungsinya
     public static void keluarkanInterpolasi(Matrix a) {
         int n = a.getCol();
         Matrix b = new Matrix(a.getRow(), a.getCol());
         b = SistemPersamaanLinear.MatrixGaussJordan(a);
-
-        System.out.print("y = ");
+        System.out.println("\nPolinom interpolasi yang melewati titik-titik tersebut ialah: ");
+        System.out.print("f(x) = ");
         for (int k=0;k<n-1;k++){
             if (b.getElmt(k, n - 1) == 0) {
                 continue;
@@ -45,22 +57,45 @@ public class Interpolasi {
         }
     }
 
-    public static void outputInterpolasi(Matrix a, int x) {
-        int n = a.getCol();
-        Matrix b = new Matrix(a.getRow(), a.getCol());
-        b = SistemPersamaanLinear.MatrixGaussJordan(a);
-
-        Matrix inputData = new Matrix(1, b.getRow());
-
-        while (x > 0) {
-            double y = 0;
-            inputData.createMatrix();
-            for (int k = 0; k < n - 1; k++) {
-                y += b.getElmt(k, n - 1) * Math.pow(inputData.getElmt(0, k), k);
-            }
-            System.out.println("Prediksi nilai y dari interpolasi adalah : " + String.format("%.4f", y));
-            x--;
+    public static void keluarkanInterpolasiCrammer(Matrix a){
+      Matrix b = new Matrix();
+      b = Crammer.matrixCrammer(a);
+      for(int i = 0; i < b.getRow(); i++){
+        if(i == 0){
+          System.out.print(String.format("%.4f", b.getElmt(i,0)));
         }
+        else if(i == 1){
+          System.out.print(String.format(b.getElmt(i-1, 0) == 0 ? "" : " + " + "(%.4f)", b.getElmt(i, 0)) + "x");
+        }else{
+          System.out.print(String.format(b.getElmt(i-1, 0) == 0 ? "" : " + " + "(%.4f)", b.getElmt(i, 0)) + "x^" + i);
+        }
+      }
+    }
+
+    //NOTE ini buat ngedapetin array answernya
+    public static Matrix getAnsInterpolasi(Matrix a){
+      int n = a.getCol();
+      Matrix b = new Matrix(a.getRow(), a.getCol());
+      Matrix ans = new Matrix(a.getRow(),1);
+      // b = SistemPersamaanLinear.MatrixGaussJordan(a);
+      b = Crammer.matrixCrammer(a);
+      // for (int i=0;i<ans.getRow();i++){
+      //       ans.setElmt(i, 0, b.getElmt(i, n-1));
+      // }
+      return b;
+    }
+    
+    //NOTE x ini sebagai input nilainya misal mau nyari f(2) berarti x nya 2
+    public static void outputInterpolasi(Matrix a, double x) {
+      Scanner sc = new Scanner(System.in);
+      Matrix inputData = new Matrix(a.getRow(), 1);
+      inputData = getAnsInterpolasi(a);
+      double y = 0;
+      for (int k = 0; k < a.getRow(); k++) {
+          y += inputData.getElmt(k, 0) * Math.pow(x, k);
+      }
+      System.out.println(String.format("\nTaksiran nilai f(%f) ialah: %f", x, y));
+      sc.close();
     }
 
     public static void fileInterpolasi(Matrix a, int x, String namaFile) {

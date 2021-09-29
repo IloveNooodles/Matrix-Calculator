@@ -74,7 +74,6 @@ public class RLB {
     /* KAMUS */
     int i;
     Matrix n;
-    double[] ans = new double[m.getRow()];
     /* ALGORITMA */
     n = new Matrix(m.getRow(), m.getCol());
     n = convertRLBMatrix(m);

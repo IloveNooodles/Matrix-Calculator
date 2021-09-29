@@ -389,10 +389,10 @@ public class Menu {
   }
 
   public static void InterpolasiKeyboard() {
+    Matrix interpolasi = new Matrix(Menu.m.getRow(),1);
     System.out.println("");
     System.out.println("Hasil interpolasi data tersebut adalah: ");
-    Interpolasi.keluarkanInterpolasi(Menu.m);
-
+    interpolasi = Interpolasi.keluarkanInterpolasi(Menu.m);
     System.out.println("");
     System.out.print("Masukkan jumlah titik data yang ingin diprediksi: ");
     int x = sc.nextInt();
