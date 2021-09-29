@@ -2,7 +2,6 @@ import Utility.*;
 import Aplikasi.RLB;
 import Matrix.*;
 
-@SuppressWarnings("all")
 public class Main{
   public static void main(String[] args) {
     // Menu.menuLoop();
