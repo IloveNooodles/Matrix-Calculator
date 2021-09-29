@@ -27,33 +27,77 @@ public class Interpolasi {
         int n = a.getCol();
         Matrix b = new Matrix(a.getRow(), a.getCol());
         b = SistemPersamaanLinear.MatrixGaussJordan(a);
+
+        System.out.print("y = ");
         for (int k=0;k<n-1;k++){
-            if(k==0){
+            if (b.getElmt(k, n - 1) == 0) {
+                continue;
+            }
+            else if(k==0){
                 System.out.print(String.format("%.4f", b.getElmt(k,n-1)));
             }
             else if(k==1){
-                System.out.print(String.format("+ " + "%.4f", b.getElmt(k, n-1)) + "x");
+                System.out.print(String.format(b.getElmt(k - 1, n - 1) == 0 ? "" : " + " + "(%.4f)", b.getElmt(k, n-1)) + "x");
             }
             else {
-                System.out.print(String.format("+ " + "%.4f", b.getElmt(k, n-1)) + "x^" + k);
+                System.out.print(String.format(b.getElmt(k - 1, n - 1) == 0 ? "" : " + " + "(%.4f)", b.getElmt(k, n-1)) + "x^" + k);
             }
         }
     }
 
-    public static void fileInterpolasi(Matrix a, String namaFile) {
+    public static void outputInterpolasi(Matrix a, int x) {
         int n = a.getCol();
         Matrix b = new Matrix(a.getRow(), a.getCol());
         b = SistemPersamaanLinear.MatrixGaussJordan(a);
+
+        Matrix inputData = new Matrix(1, b.getRow());
+
+        while (x > 0) {
+            double y = 0;
+            inputData.createMatrix();
+            for (int k = 0; k < n - 1; k++) {
+                y += b.getElmt(k, n - 1) * Math.pow(inputData.getElmt(0, k), k);
+            }
+            System.out.println("Prediksi nilai y dari interpolasi adalah : " + String.format("%.4f", y));
+            x--;
+        }
+    }
+
+    public static void fileInterpolasi(Matrix a, int x, String namaFile) {
+        int n = a.getCol();
+        Matrix b = new Matrix(a.getRow(), a.getCol());
+        b = SistemPersamaanLinear.MatrixGaussJordan(a);
+
+        String tempString = "";
+        tempString += "y = ";
         for (int k=0;k<n-1;k++){
-            if(k==0){
-                IO.writeFileString(namaFile, String.format("%.4f", b.getElmt(k,n-1)));
+            if (b.getElmt(k, n - 1) == 0) {
+                continue;
+            }
+            else if(k==0){
+                tempString += String.format("%.4f", b.getElmt(k,n-1));
             }
             else if(k==1){
-                IO.writeFileString(namaFile, String.format("+ " + "%.4f", b.getElmt(k, n-1)) + "x");
+                tempString += String.format(b.getElmt(k - 1, n - 1) == 0 ? "" : " + " + "(%.4f)", b.getElmt(k, n-1)) + "x";
             }
             else {
-                IO.writeFileString(namaFile, String.format("+ " + "%.4f", b.getElmt(k, n-1)) + "x^" + k);
+                tempString += String.format(b.getElmt(k - 1, n - 1) == 0 ? "" : " + " + "(%.4f)", b.getElmt(k, n-1)) + "x^" + k;
             }
         }
+        tempString += "\n";
+
+        Matrix inputData = new Matrix(1, b.getRow());
+
+        while (x > 0) {
+            double y = 0;
+            inputData.createMatrix();
+            for (int k = 0; k < n - 1; k++) {
+                y += b.getElmt(k, n - 1) * Math.pow(inputData.getElmt(0, k), k);
+            }
+            tempString += String.format("%.4f", y) + "\n";
+            x--;
+        }
+
+        IO.writeFileString(namaFile, tempString);
     }
 }

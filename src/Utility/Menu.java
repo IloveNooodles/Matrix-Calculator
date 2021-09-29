@@ -392,13 +392,21 @@ public class Menu {
     System.out.println("");
     System.out.println("Hasil interpolasi data tersebut adalah: ");
     Interpolasi.keluarkanInterpolasi(Menu.m);
+
+    System.out.println("");
+    System.out.print("Masukkan jumlah titik data yang ingin diprediksi: ");
+    int x = sc.nextInt();
+    Interpolasi.outputInterpolasi(Menu.m, x);
   }
 
   public static void RegresiKeyboard() {
     System.out.println("");
+    System.out.println("Hasil regresi data tersebut adalah: ");
+    RLB.keluarkanRLB(Menu.m);
+
+    System.out.println("");
     System.out.print("Masukkan jumlah titik data yang ingin diprediksi: ");
     int x = sc.nextInt();
-
     RLB.outputRLB(Menu.m, x);
   }
 
@@ -446,7 +454,11 @@ public class Menu {
 
   public static void InterpolasiFile() {
     outputFile();
-    Interpolasi.fileInterpolasi(Menu.m, Menu.namaFile);
+    System.out.println("");
+    System.out.print("Masukkan jumlah titik data yang ingin diprediksi: ");
+    int x = sc.nextInt();
+
+    Interpolasi.fileInterpolasi(Menu.m, x, Menu.namaFile);
   }
 
   public static void RegresiFile() {
