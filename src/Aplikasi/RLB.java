@@ -67,50 +67,95 @@ public class RLB {
     }
 
     sc.close();
-    return convertRLBMatrix(m);
+    return m;
+  }
+
+  public static void keluarkanRLB(Matrix m) {
+    /* KAMUS */
+    int i;
+    Matrix n;
+
+    /* ALGORITMA */
+    n = new Matrix(m.getRow(), m.getCol());
+    n = convertRLBMatrix(m);
+
+    System.out.print("y = ");
+    for (i = 0; i < n.getCol() - 1; i++) {
+      if (n.getElmt(i, n.getCol() - 1) == 0) {
+        continue;
+      }
+      else if (i == 0) {
+        System.out.print(String.format("(%.4f)", n.getElmt(i, n.getCol() - 1)));
+      }
+      else {
+        System.out.print(String.format(n.getElmt(i - 1, n.getCol() - 1) == 0 ? "" : " + " + "(%.4f)", n.getElmt(i, n.getCol() - 1)) + "x" + i);
+      }
+    }
   }
 
   public static void outputRLB(Matrix m, int x) {
     /* KAMUS */
     int i;
     double y;
-    Matrix inputData;
+    Matrix inputData, n;
 
     /* ALGORITMA */
-    Scanner sc = new Scanner(System.in);
-    inputData = new Matrix(1, m.getRow());
+    
+    n = new Matrix(m.getRow(), m.getCol());
+    n = convertRLBMatrix(m);
+
+    inputData = new Matrix(1, n.getRow());
 
     while (x > 0) {
-      y = 0;
       inputData.createMatrix();
-      for (i = 0; i < m.getRow();i++) {
-        y += inputData.getElmt(0, i) * m.getElmt(i, m.getCol() - 1);
+      y = n.getElmt(0, n.getCol() - 1);
+      for (i = 1; i < n.getRow();i++) {
+        y += inputData.getElmt(0, i - 1) * n.getElmt(i, n.getCol() - 1);
       }
-      System.out.println("Prediksi nilai y dari regresi linear adalah : " + y);
+      System.out.println("Prediksi nilai y dari regresi linear adalah : " + String.format("%.4f", y));
       x--;
     }
-    sc.close();
   }
 
   public static void fileRLB(Matrix m, int x, String namaFile) {
     /* KAMUS */
     int i;
     double y;
-    Matrix inputData;
+    Matrix inputData, n;
+    String tempString;
 
     /* ALGORITMA */
-    Scanner sc = new Scanner(System.in);
-    inputData = new Matrix(1, m.getRow());
+
+    n = new Matrix(m.getRow(), m.getCol());
+    n = convertRLBMatrix(m);
+
+    tempString = "";
+    tempString += "y = ";
+    for (i = 0; i < n.getCol() - 1; i++) {
+      if (n.getElmt(i, n.getCol() - 1) == 0) {
+        continue;
+      }
+      else if (i == 0) {
+        tempString += String.format("%.4f", n.getElmt(i, n.getCol() - 1));
+      }
+      else {
+        tempString += String.format(n.getElmt(i - 1, n.getCol() - 1) == 0 ? "" : " + " + "(%.4f)", n.getElmt(i, n.getCol() - 1)) + "x" + i;
+      }
+    }
+    tempString += "\n";
+
+    inputData = new Matrix(1, n.getRow());
 
     while (x > 0) {
-      y = 0;
       inputData.createMatrix();
-      for (i = 0; i < m.getRow();i++) {
-        y += inputData.getElmt(0, i) * m.getElmt(i, m.getCol() - 1);
+      y = n.getElmt(0, n.getCol() - 1);
+      for (i = 1; i < n.getRow();i++) {
+        y += inputData.getElmt(0, i - 1) * n.getElmt(i, n.getCol() - 1);
       }
-      IO.writeFileString(namaFile, Double.toString(y));
+      tempString += String.format("%.4f", y) + "\n";
       x--;
     }
-    sc.close();
+
+    IO.writeFileString(namaFile, tempString);
   }
 }
