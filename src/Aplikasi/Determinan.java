@@ -97,7 +97,7 @@ public class Determinan {
     }
 
     public static void displayOBE(Matrix m) {
-        System.out.println("Deteriman matriks tersebut adalah " + determinanOBE(m));
+        System.out.println("Determinan matriks tersebut adalah " + determinanOBE(m));
     }
 
     public static void fileOBE(Matrix m, String namaFile) {
