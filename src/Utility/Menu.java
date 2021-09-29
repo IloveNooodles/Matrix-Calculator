@@ -8,7 +8,7 @@ import Aplikasi.*;
 public class Menu {
   private static Scanner sc = new Scanner(System.in);
 
-  private static Matrix m;
+  private static Matrix m = new Matrix();
 
   private static String namaFile;
 
@@ -24,7 +24,6 @@ public class Menu {
   }
 
   public static void mainMenu() {
-    m = new Matrix();
     System.out.println("");
     System.out.println("SELAMAT DATANG DI MATRIX CALCULATOR");
     System.out.println("###### MENU ######");
@@ -257,10 +256,10 @@ public class Menu {
     int jumlahBaris = sc.nextInt();
     System.out.print("Masukan n: ");
     int jumlahKolom = sc.nextInt();
-    m = new Matrix(jumlahBaris, jumlahKolom);
+    Menu.m = new Matrix(jumlahBaris, jumlahKolom);
 
     System.out.println("Silahkan masukan setiap element matrix: ");
-    m.createMatrix();
+    Menu.m.createMatrix();
   }
 
   public static void inputSqrtMatrix(){
@@ -268,10 +267,10 @@ public class Menu {
     System.out.println("Akan dibuat matrix berukuran n x n");
     System.out.print("Masukan n: "); 
     int n = sc.nextInt();
-    m = new Matrix(n, n);
+    Menu.m = new Matrix(n, n);
 
     System.out.println("Silahkan masukan setiap element matrix: ");
-    m.createMatrix();
+    Menu.m.createMatrix();
   }
 
   public static void inputInterpolasi(){
@@ -279,10 +278,10 @@ public class Menu {
     System.out.println("Akan dibuat interpolasi dengan pasangan sebanyak n buah");
     System.out.print("Masukan n: ");
     int n = sc.nextInt();
-    m = new Matrix(n, n + 1);
+    Menu.m = new Matrix(n, n + 1);
 
     System.out.println("Silahkan masukan setiap pasangan: ");
-    m = Interpolasi.masukkanInterpolasi(n);
+    Menu.m = Interpolasi.masukkanInterpolasi(n);
   }
 
   public static void inputRegresi(){
@@ -292,10 +291,10 @@ public class Menu {
     int n = sc.nextInt();
     System.out.print("Masukan k: ");
     int k = sc.nextInt();
-    m = new Matrix(n, k + 1);
+    Menu.m = new Matrix(n, k + 1);
 
     System.out.println("Silahkan masukkan data:");
-    m = RLB.inputRLB(n, k);
+    Menu.m = RLB.inputRLB(n, k);
   }
 
   public static void inputTranspose() {
@@ -303,10 +302,10 @@ public class Menu {
     System.out.println("Akan dibuat transpose matriks n x n");
     System.out.print("Masukan n: ");
     int n = sc.nextInt();
-    m = new Matrix(n, n);
+    Menu.m = new Matrix(n, n);
 
     System.out.println("Silahkan masukan setiap element matrix: ");
-    m.createMatrix();
+    Menu.m.createMatrix();
   }
 
   public static void SPLKeyboard(){
@@ -320,16 +319,16 @@ public class Menu {
     int i = sc.nextInt();
     switch (i) {
       case 1:
-        SistemPersamaanLinear.SPLGauss(m);
+        SistemPersamaanLinear.SPLGauss(Menu.m);
         break;
       case 2:
-        SistemPersamaanLinear.SPLGaussJordan(m);
+        SistemPersamaanLinear.SPLGaussJordan(Menu.m);
         break;
       case 3:
-        SistemPersamaanLinear.SPLinverse(m);
+        SistemPersamaanLinear.SPLinverse(Menu.m);
         break;
       case 4:
-        Crammer.crammer(m);
+        Crammer.crammer(Menu.m);
         break;
       default:
         System.out.println("\nMohon masukan input yang benar!");
@@ -348,13 +347,13 @@ public class Menu {
 
     switch (i) {
       case 1:
-        Determinan.displayOBE(m);
+        Determinan.displayOBE(Menu.m);
         break;
       case 2:
-        Determinan.displayEkspansiKofaktor(m);
+        Determinan.displayEkspansiKofaktor(Menu.m);
         break;
       case 3:
-        Determinan.displaySarrus(m); 
+        Determinan.displaySarrus(Menu.m); 
         break;
       default:
         System.out.println("\nMohon masukan input yang benar!");
@@ -372,10 +371,10 @@ public class Menu {
 
     switch (i) {
       case 1:
-        Inverse.displayGaussJordan(m);
+        Inverse.displayGaussJordan(Menu.m);
         break;
       case 2:
-        Inverse.displayInverseAdjoint(m);
+        Inverse.displayInverseAdjoint(Menu.m);
         break;
       default:
         System.out.println("\nMohon masukan input yang benar!");
@@ -386,13 +385,13 @@ public class Menu {
   public static void TransposeKeyboard() {
     System.out.println("");
     System.out.println("Transpose dari matriks tersebut adalah: ");
-    Operation.transpose(m).displayMatrix();
+    Operation.transpose(Menu.m).displayMatrix();
   }
 
   public static void InterpolasiKeyboard() {
     System.out.println("");
     System.out.println("Hasil interpolasi data tersebut adalah: ");
-    Interpolasi.keluarkanInterpolasi(m);
+    Interpolasi.keluarkanInterpolasi(Menu.m);
   }
 
   public static void RegresiKeyboard() {
@@ -400,7 +399,7 @@ public class Menu {
     System.out.print("Masukkan jumlah titik data yang ingin diprediksi: ");
     int x = sc.nextInt();
 
-    RLB.outputRLB(m, x);
+    RLB.outputRLB(Menu.m, x);
   }
 
   public static void inputFileMatrix() {
@@ -412,8 +411,8 @@ public class Menu {
     System.out.print("Masukan pilihan: ");
     int q = sc.nextInt();
 
-    m = new Matrix();
-    m = IO.readMatrix(listFiles[q - 1].getName());
+    Menu.m = new Matrix();
+    Menu.m = IO.readMatrix(listFiles[q - 1].getName());
   }
 
   public static void inputFileSqrtMatrix() {
@@ -425,21 +424,21 @@ public class Menu {
     System.out.print("Masukan pilihan: ");
     int q = sc.nextInt();
 
-    m = new Matrix();
-    m = IO.readSqrtMatrix(listFiles[q - 1].getName());
+    Menu.m = new Matrix();
+    Menu.m = IO.readMatrix(listFiles[q - 1].getName());
   }
 
   public static void outputFile() {
     System.out.println("");
     System.out.print("Masukan nama file output: ");
 
-    namaFile = new String();
-    namaFile = sc.nextLine();
+    Menu.namaFile = new String();
+    Menu.namaFile = sc.nextLine(); // INI BUG BISA DIGANTI
   }
 
   public static void InterpolasiFile() {
     outputFile();
-    Interpolasi.fileInterpolasi(m, namaFile);
+    Interpolasi.fileInterpolasi(Menu.m, Menu.namaFile);
   }
 
   public static void RegresiFile() {
@@ -448,7 +447,7 @@ public class Menu {
     System.out.print("Masukkan jumlah titik data yang ingin diprediksi: ");
     int x = sc.nextInt();
 
-    RLB.fileRLB(m, x, namaFile);
+    RLB.fileRLB(Menu.m, x, Menu.namaFile);
   }
 
   public static void DeterminanFile() {
@@ -463,13 +462,13 @@ public class Menu {
 
     switch (i) {
       case 1:
-        Determinan.fileEkspansiKofaktor(m, namaFile);
+        Determinan.fileEkspansiKofaktor(Menu.m, Menu.namaFile);
         break;
       case 2:
-        Determinan.fileOBE(m, namaFile);
+        Determinan.fileEkspansiKofaktor(Menu.m, Menu.namaFile);
         break;
       case 3:
-        Determinan.fileSarrus(m, namaFile);
+        Determinan.fileSarrus(Menu.m, Menu.namaFile);
         break;
       default:
         System.out.println("\nMohon masukan input yang benar!");
@@ -488,10 +487,10 @@ public class Menu {
 
     switch (i) {
       case 1:
-        Inverse.fileGaussJordan(m, namaFile);
+        Inverse.fileGaussJordan(Menu.m, Menu.namaFile);
         break;
       case 2:
-        Inverse.fileInverseAdjoint(m, namaFile);
+        Inverse.fileInverseAdjoint(Menu.m, Menu.namaFile);
         break;
       default:
         System.out.println("\nMohon masukan input yang benar!");
@@ -511,16 +510,16 @@ public class Menu {
     int i = sc.nextInt();
     switch (i) {
       case 1:
-        SistemPersamaanLinear.FileSPLGauss(m, namaFile);
+        SistemPersamaanLinear.FileSPLGauss(Menu.m, Menu.namaFile);
         break;
       case 2:
-        SistemPersamaanLinear.FileSPLGaussJordan(m, namaFile);
+        SistemPersamaanLinear.FileSPLGaussJordan(Menu.m, Menu.namaFile);
         break;
       case 3:
-        SistemPersamaanLinear.FileSPLinverse(m, namaFile);
+        SistemPersamaanLinear.FileSPLinverse(Menu.m, Menu.namaFile);
         break;
       case 4:
-        Crammer.FileCrammer(m, namaFile);
+        Crammer.FileCrammer(Menu.m, Menu.namaFile);
         break;
       default:
         System.out.println("\nMohon masukan input yang benar!");
@@ -530,7 +529,7 @@ public class Menu {
 
   public static void TransposeFile() {
     outputFile();
-    IO.writeFileMatrix(namaFile, Operation.transpose(m));
+    IO.writeFileMatrix(Menu.namaFile, Operation.transpose(Menu.m));
   }
 
   public static void exit(){

@@ -145,9 +145,11 @@ public class SistemPersamaanLinear {
             }
             else{
                 a = Operation.multMatrix(Inverse.inverseAdjoint(a), b);
+                String tempString = "";
                 for (int i=0;i<a.getRow();i++){
-                    IO.writeFileString(namaFile, "x" + i + " = " + String.format("%.4f", a.getElmt(i, 0)));
+                    tempString += "x" + i + " = " + String.format("%.4f", a.getElmt(i, 0)) + "\n";
                 }
+                IO.writeFileString(namaFile, tempString);
             }
         }
     }
@@ -285,9 +287,11 @@ public class SistemPersamaanLinear {
             IO.writeFileString(namaFile, "SPL tidak memiliki solusi");
         }
         else{
+            String tempString = "";
             for (int i=0;i<m.getCol()-1;i++){
-                IO.writeFileString(namaFile, "x" + (i+1) + " = " + ToString(solusi[i]));
+                tempString += "x" + (i+1) + " = " + ToString(solusi[i]) + "\n";
             }
+            IO.writeFileString(namaFile, tempString);
         }
     }
 
@@ -389,9 +393,11 @@ public class SistemPersamaanLinear {
             IO.writeFileString(namaFile, "SPL tidak memiliki solusi");
         }
         else{
+            String tempString = "";
             for (int i=0;i<m.getCol()-1;i++){
-                IO.writeFileString(namaFile, "x" + (i+1) + " = " + ToString(solusi[i]));
+                tempString += "x" + (i+1) + " = " + ToString(solusi[i]) + "\n";
             }
+            IO.writeFileString(namaFile, tempString);
         }
     }
 }

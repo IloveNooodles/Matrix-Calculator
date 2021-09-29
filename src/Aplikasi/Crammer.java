@@ -46,13 +46,15 @@ public class Crammer {
     }
     else{
       double[] listDet = new double[a.getRow()];
+      String tempString = "";
       for(int i = 0; i < a.getCol(); i++){
         Matrix c = new Matrix();
         c = c.copyMatrix(a);
         Operation.setCol(c, b, i, 0);
         listDet[i] = Determinan.ekspansiKofaktor(c)/temp;
-        IO.writeFileString(namaFile, String.format("X%d: %,.4f", i+1, listDet[i]));
+        tempString += String.format("X%d: %,.4f", i+1, listDet[i]) + "\n";
       }
+      IO.writeFileString(namaFile, tempString);
     }
   }
 }

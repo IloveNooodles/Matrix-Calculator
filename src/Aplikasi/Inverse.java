@@ -52,7 +52,7 @@ public class Inverse {
       if (n == null) {
         IO.writeFileString(namaFile, "Matriks tidak mempunyai balikan");
       } else {
-        IO.writeFileMatrixSqrt(namaFile, m);
+        IO.writeFileMatrix(namaFile, m);
       }
     }
 
@@ -119,7 +119,7 @@ public class Inverse {
       if (n == null) {
         IO.writeFileString(namaFile, "Matriks tidak mempunyai balikan");
       } else {
-        IO.writeFileMatrixSqrt(namaFile, m);
+        IO.writeFileMatrix(namaFile, m);
       }
     }
 }
