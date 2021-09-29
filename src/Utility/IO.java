@@ -2,7 +2,9 @@ package Utility;
 
 import java.io.*;
 import Matrix.*;
-
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 public class IO {
 
@@ -51,37 +53,13 @@ public class IO {
     return count;
   }
 
-  // public static Matrix readAugmentMatrix(String s){
-  //   Matrix a = new Matrix(readRow(s), readCol(s)-1);
-  //   Matrix b = new Matrix(readRow(s), 1);
-  //   try{
-  //     FileReader reader = new FileReader(String.format("../test/%s", s));
-  //     BufferedReader bufferReader = new BufferedReader(reader);
-
-  //     String line;
-  //     int count = 0;
-  //     while((line = bufferReader.readLine()) != null){
-  //       String[] lines = line.split(" ");
-  //       for(int i = 0; i < lines.length; i++){
-  //         double temp = Double.parseDouble(lines[i]);
-  //         if(i != lines.length - 1){
-  //           a.setElmt(count, i, temp);
-  //         }else{
-  //           b.setElmt(count, 0, temp);
-  //         }
-  //       }
-  //       count++;
-  //     }
-  //     reader.close();
-  //   } catch(IOException e){
-  //     e.printStackTrace();
-  //   }
-  //   return Operation.augmentedMatrix(a, b);
-  // }
-
   public static Matrix readMatrix(String s){
     Matrix a = new Matrix(readRow(s), readCol(s));
-    try{
+
+    ScriptEngineManager manager = new ScriptEngineManager();
+    ScriptEngine engine = manager.getEngineByName("JavaScript");
+
+    try {
       FileReader reader = new FileReader(String.format("../test/%s", s));
       BufferedReader bufferReader = new BufferedReader(reader);
 
@@ -90,7 +68,12 @@ public class IO {
       while((line = bufferReader.readLine()) != null){
         String[] lines = line.split(" ");
         for(int i = 0; i < lines.length; i++){
-          double temp = Double.parseDouble(lines[i]);
+          double temp = 0;
+          try {
+            temp = ((Number) engine.eval(lines[i])).doubleValue();
+          } catch (ScriptException e) {
+            e.printStackTrace();
+          }
           a.setElmt(count, i, temp);
         }
         count++;
@@ -123,10 +106,13 @@ public class IO {
     try {
       FileWriter writer = new FileWriter(String.format("../test/%s.txt", namaFile));
       writer.write(s);
-      writer.write("\n");
       writer.close();
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  public static void main(String[] args) {
+    
   }
 }

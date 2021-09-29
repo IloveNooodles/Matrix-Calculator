@@ -1,6 +1,6 @@
 package Utility;
 
-import java.io.File;
+import java.io.*;
 import java.util.Scanner;
 import Matrix.*;
 import Aplikasi.*;
@@ -429,11 +429,19 @@ public class Menu {
   }
 
   public static void outputFile() {
+    InputStreamReader streamReader = new InputStreamReader(System.in);
+    BufferedReader bufferedReader = new BufferedReader(streamReader);
+
     System.out.println("");
     System.out.print("Masukan nama file output: ");
 
     Menu.namaFile = new String();
-    Menu.namaFile = sc.nextLine(); // INI BUG BISA DIGANTI
+
+    try {
+      namaFile = bufferedReader.readLine();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   public static void InterpolasiFile() {
