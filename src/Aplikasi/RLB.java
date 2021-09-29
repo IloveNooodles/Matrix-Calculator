@@ -40,8 +40,8 @@ public class RLB {
 
     rlb = new Matrix();
     rlb = rlb.copyMatrix(Operation.augmentedMatrix(rlbX, rlbY));
-
-    return SistemPersamaanLinear.MatrixGaussJordan(rlb);
+    return rlb;
+    // return SistemPersamaanLinear.MatrixGaussJordan(rlb);
 
   }
 

@@ -91,7 +91,7 @@ public class Matrix {
         } catch (ScriptException e) {
           e.printStackTrace();
         }
-        d = BigDecimal.valueOf(d).setScale(4, RoundingMode.HALF_UP).doubleValue();
+        d = BigDecimal.valueOf(d).setScale(8, RoundingMode.HALF_UP).doubleValue();
         this.mtxr[i][j] = d;
       }
     }
@@ -162,4 +162,13 @@ public class Matrix {
       }
     }
   }
+
+  public void setPrecisionWORounding(int scale){
+    for(int i = 0; i < this.row; i++){
+      for(int j = 0; j < this.col; j++){
+        this.mtxr[i][j] = BigDecimal.valueOf(this.mtxr[i][j]).setScale(scale).doubleValue();
+      }
+    }
+  }
+
 }
