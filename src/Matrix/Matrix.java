@@ -2,12 +2,14 @@ package Matrix;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Scanner;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+import java.io.*;
 
 public class Matrix {
   private int row, col;
   private Double mtxr[][];
-  private Scanner sc = new Scanner(System.in);
   
   // KONSTRUKTOR
   public Matrix(){
@@ -62,9 +64,32 @@ public class Matrix {
 
   //OPERASI
   public void createMatrix(){
+    ScriptEngineManager manager = new ScriptEngineManager();
+    ScriptEngine engine = manager.getEngineByName("JavaScript");
+    
+    InputStreamReader streamReader = new InputStreamReader(System.in);
+    BufferedReader bufferedReader = new BufferedReader(streamReader);
+
     for(int i = 0; i < this.row; i++){
+
+      String[] element;
+      String line = new String();
+
+      try {
+        line = bufferedReader.readLine();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+
+      element = line.split(" ");
+      
       for(int j = 0; j < this.col; j++){
-        double d = sc.nextDouble();
+        double d = 0;
+        try {
+          d = ((Number) engine.eval(element[j])).doubleValue();
+        } catch (ScriptException e) {
+          e.printStackTrace();
+        }
         d = BigDecimal.valueOf(d).setScale(4, RoundingMode.HALF_UP).doubleValue();
         this.mtxr[i][j] = d;
       }
