@@ -261,6 +261,8 @@ public class SistemPersamaanLinear {
     public static void FileSPLGauss(Matrix m, String namaFile) {
         String variable = "abcdefghijklmnopqrstuvwxyz";
         boolean noSolution = false;
+        Matrix n = new Matrix();
+        n = n.copyMatrix(m);
         m = matrixGauss(m);
         double[][] solusi = new double[27][27];
         int variabel = 1;
@@ -306,7 +308,22 @@ public class SistemPersamaanLinear {
         else{
             String tempString = "";
             for (int i=0;i<m.getCol()-1;i++){
-                tempString += "x" + (i+1) + " = " + ToString(solusi[i]) + "\n";
+                if(ToString(solusi[i])!="0"){
+                    tempString += "x" + (i+1) + " = " + ToString(solusi[i]) + "\n";
+                }
+                else{
+                    for (int k=0;k<n.getRow();k++){
+                        if(n.getElmt(k,i)!=0){
+                            tempString += "x" + (i+1) + " = " + ToString(solusi[i]) + "\n";
+                            break;
+                        }
+                        else if(k==n.getRow()-1){
+                            solusi[i][variabel]=1;
+                            variabel++;
+                            tempString += "x" + (i+1) + " = " + ToString(solusi[i]) + "\n";
+                        }
+                    }
+                }
             }
             IO.writeFileString(namaFile, tempString);
         }
@@ -384,7 +401,9 @@ public class SistemPersamaanLinear {
     public static void FileSPLGaussJordan(Matrix m, String namaFile) {
         String variable = "abcdefghijklmnopqrstuvwxyz";
         boolean noSolution = false;
-        m = MatrixGaussJordan(m);
+        Matrix n = new Matrix();
+        n = n.copyMatrix(m);
+        m = matrixGauss(m);
         double[][] solusi = new double[27][27];
         int variabel = 1;
         for (int i=m.getRow()-1;i>=0;i--){
@@ -429,7 +448,22 @@ public class SistemPersamaanLinear {
         else{
             String tempString = "";
             for (int i=0;i<m.getCol()-1;i++){
-                tempString += "x" + (i+1) + " = " + ToString(solusi[i]) + "\n";
+                if(ToString(solusi[i])!="0"){
+                    tempString += "x" + (i+1) + " = " + ToString(solusi[i]) + "\n";
+                }
+                else{
+                    for (int k=0;k<n.getRow();k++){
+                        if(n.getElmt(k,i)!=0){
+                            tempString += "x" + (i+1) + " = " + ToString(solusi[i]) + "\n";
+                            break;
+                        }
+                        else if(k==n.getRow()-1){
+                            solusi[i][variabel]=1;
+                            variabel++;
+                            tempString += "x" + (i+1) + " = " + ToString(solusi[i]) + "\n";
+                        }
+                    }
+                }
             }
             IO.writeFileString(namaFile, tempString);
         }
