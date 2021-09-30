@@ -1,8 +1,10 @@
-# Algeo01-20029
+# Algeo01-20029 - AlgeoKerenGaming
 
-Tugas Besar 1 Aljabar Linear dan Geometri
+Tugas Besar 1 Aljabar Linear dan Geometri IF20 is a project to build matrice calculator which calculates Polynomial Interpolation, Multiple Linear Regression, Linear Equation System and Determinant. Don't forget to set the precision correctly to get exact result.
 
-## Struktur file
+---
+
+## File Structure
 
 ```
 ├── Laporan.docx
@@ -22,45 +24,45 @@ Tugas Besar 1 Aljabar Linear dan Geometri
 │   └── Utility
 │       ├── IO.class
 │       └── Menu.class
+├── sources.txt
 ├── src
 │   ├── Aplikasi
-│   │   ├── Crammer.class
 │   │   ├── Crammer.java
-│   │   ├── Determinan.class
 │   │   ├── Determinan.java
-│   │   ├── Interpolasi.class
 │   │   ├── Interpolasi.java
-│   │   ├── Inverse.class
 │   │   ├── Inverse.java
-│   │   ├── RLB.class
 │   │   ├── RLB.java
-│   │   ├── SistemPersamaanLinear.class
 │   │   └── SistemPersamaanLinear.java
-│   ├── Main.class
 │   ├── Main.java
 │   ├── Matrix
-│   │   ├── Matrix.class
 │   │   ├── Matrix.java
-│   │   ├── Operation.class
 │   │   └── Operation.java
 │   └── Utility
-│       ├── IO.class
 │       ├── IO.java
-│       ├── Menu.class
 │       └── Menu.java
 └── test
-    ├── 1spl_a.txt
-    ├── 1spl_b.txt
-    ├── 1spl_c.txt
-    ├── 1spl_d1.txt
-    ├── 1spl_d2.txt
-    ├── 2spl_a.txt
-    ├── 2spl_b.txt
-    ├── 3spl_a.txt
-    ├── 3x3.txt
-    ├── contohDeterminan.txt
-    ├── contohInterpolasi.txt
-    ├── contohSpl.txt
-    ├── garegaming.txt
-    └── regresi.txt
+    ├── 1_a.txt
+    ├── 1_b.txt
+    ├── 1_c.txt
+    ├── 1_d1.txt
+    ├── 1_d2.txt
+    ├── 2_a.txt
+    ├── 2_b.txt
+    ├── 3_a.txt
+    ├── 3_b.txt
+    ├── 4.txt
+    ├── 5.txt
+    ├── 6_a.txt
+    ├── 6_b.txt
+    ├── 6_c.txt
+    └── 7.txt
 ```
+
+---
+
+## How To Use?
+
+1. Clone folder with `git clone https://github.com/IloveNooodles/Algeo01-20029.git`
+1. Go to the folder `cd Algeo01-20029`
+1. Go to bin folder `cd bin`
+1. Run matrix calculator using `java Main` command

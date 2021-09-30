@@ -65,7 +65,7 @@ public class RLB {
         System.out.print(String.format("(%.4f)", n.getElmt(i, n.getCol() - 1)));
       }
       else {
-        System.out.print(String.format(n.getElmt(i - 1, n.getCol() - 1) == 0 ? "" : " + " + "(%.4f)", n.getElmt(i, n.getCol() - 1)) + "x" + i);
+        System.out.print((n.getElmt(i - 1, n.getCol() - 1) == 0 ? "" : " + ") + String.format("(%.4f)" + "x" + i, n.getElmt(i, n.getCol() - 1)));
       }
     }
 
@@ -118,7 +118,7 @@ public class RLB {
         tempString += String.format("%.4f", n.getElmt(i, n.getCol() - 1));
       }
       else {
-        tempString += String.format(n.getElmt(i - 1, n.getCol() - 1) == 0 ? "" : " + " + "(%.4f)", n.getElmt(i, n.getCol() - 1)) + "x" + i;
+        tempString += (n.getElmt(i - 1, n.getCol() - 1) == 0 ? "" : " + ") + String.format("(%.4f)" + "x" + i, n.getElmt(i, n.getCol() - 1));
       }
     }
     tempString += "\n";
