@@ -49,7 +49,7 @@ public class Menu {
         switch (q) {
           case 1:
             inputFileMatrix();
-            
+            Menu.m = Interpolasi.MatrixToMatrixInterpolasi(Menu.m);
             break;
           case 2:
             inputInterpolasi();
@@ -424,7 +424,7 @@ public class Menu {
 
     System.out.println("");
     System.out.println("Akan dicek prediksi nilai y dengan memasukan nilai x");
-    System.out.print("Masukkan jumlah titik data yang ingin diprediksi: ");
+    System.out.print("Masukkan jumlah test case yang ingin diprediksi: ");
     int n = sc.nextInt();
     while (n > 0) {
       RLB.outputRLB(Menu.m, Menu.m.getCol() - 1);
