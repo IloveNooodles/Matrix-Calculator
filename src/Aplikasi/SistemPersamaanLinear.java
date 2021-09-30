@@ -16,14 +16,13 @@ public class SistemPersamaanLinear {
     public static String ToString(double[] m){
         String variabel = "abcdefghijklmnopqrstuvwxyz";
         String ans = "";
-        Operation.setPrecisionArray(m, 4);
         for (int i=1;i<m.length;i++){
-            if(Math.abs(m[i])>=5.00e-4){
+            if(Math.abs(m[i])>=1.00e-20){
                 if (ans==""){
-                    if(Math.abs(m[i]-1)<=5.00e-4){
+                    if(Math.abs(m[i]-1)<=1.00e-20){
                         ans = variabel.substring(i-1, i);
                     }
-                    else if(Math.abs(m[i]+1)<=5.00e-4){
+                    else if(Math.abs(m[i]+1)<=1.00e-20){
                         ans = "-" + variabel.substring(i-1, i);
                     }
                     else{
@@ -32,7 +31,7 @@ public class SistemPersamaanLinear {
                 }
                 else{
                     if (m[i] > 0) {
-                        if (Math.abs(m[i]-1)<=5.00e-4) {
+                        if (Math.abs(m[i]-1)<=1.00e-20) {
                             ans += " + " + variabel.substring(i-1, i);
                         } 
                         else {
@@ -40,7 +39,7 @@ public class SistemPersamaanLinear {
                         }
                     } 
                     else {
-                        if (Math.abs(m[i]+1)<=5.00e-4) {
+                        if (Math.abs(m[i]+1)<=1.00e-20) {
                             ans += " - " + variabel.substring(i-1, i);
                         } else {
                             ans += " - " + String.format("%.2f", m[i]*(-1)) + variabel.substring(i-1, i);
@@ -49,12 +48,12 @@ public class SistemPersamaanLinear {
                 }
             }
         }
-        if(Math.abs(m[0])>=5.00e-4){
+        if(Math.abs(m[0])>=1.00e-20){
             if(ans==""){
                 ans = String.format("%.2f", m[0]);
             }
             else{
-                if(m[0]>=5.00e-4){
+                if(m[0]>=1.00e-20){
                     ans += " + " + String.format("%.2f", m[0]);
                 }
                 else{
@@ -179,7 +178,7 @@ public class SistemPersamaanLinear {
             }
             if (utama==n.getRow()-1){
                 for (int x=i+1;x<n.getCol();x++){
-                    if(Math.abs(n.getElmt(utama, x))>5.00e-4){
+                    if(Math.abs(n.getElmt(utama, x))>1.00e-20){
                         Operation.rowTimesK(n, 1/(n.getElmt(utama, x)), utama);
                         break;
                     }
@@ -201,7 +200,7 @@ public class SistemPersamaanLinear {
             int found = -1;
             double[] hasil = new double[27];
             for (int j=0;j<m.getCol();j++){
-                if(Math.abs(m.getElmt(i, j))>=5.00e-4){
+                if(Math.abs(m.getElmt(i, j))>=1.00e-20){
                     if(j==m.getCol()-1){
                         hasil[0] += m.getElmt(i, j);
                     }
@@ -225,7 +224,7 @@ public class SistemPersamaanLinear {
                 }
             }
             if(found==-1){
-                if(Math.abs(m.getElmt(i, m.getCol()-1))>=5.00e-4){
+                if(Math.abs(m.getElmt(i, m.getCol()-1))>=1.00e-20){
                     noSolution = true;
                 }
             }
@@ -270,7 +269,7 @@ public class SistemPersamaanLinear {
             int found = -1;
             double[] hasil = new double[27];
             for (int j=0;j<m.getCol();j++){
-                if(Math.abs(m.getElmt(i, j))>=5.00e-4){
+                if(Math.abs(m.getElmt(i, j))>=1.00e-20){
                     if(j==m.getCol()-1){
                         hasil[0] += m.getElmt(i, j);
                     }
@@ -294,7 +293,7 @@ public class SistemPersamaanLinear {
                 }
             }
             if(found==-1){
-                if(Math.abs(m.getElmt(i, m.getCol()-1))>=5.00e-4){
+                if(Math.abs(m.getElmt(i, m.getCol()-1))>=1.00e-20){
                     noSolution = true;
                 }
             }
@@ -341,7 +340,7 @@ public class SistemPersamaanLinear {
             int found = -1;
             double[] hasil = new double[27];
             for (int j=0;j<m.getCol();j++){
-                if(Math.abs(m.getElmt(i, j))>=5.00e-4){
+                if(Math.abs(m.getElmt(i, j))>=1.00e-20){
                     if(j==m.getCol()-1){
                         hasil[0] += m.getElmt(i, j);
                     }
@@ -365,7 +364,7 @@ public class SistemPersamaanLinear {
                 }
             }
             if(found==-1){
-                if(Math.abs(m.getElmt(i, m.getCol()-1))>=5.00e-4){
+                if(Math.abs(m.getElmt(i, m.getCol()-1))>=1.00e-20){
                     noSolution = true;
                 }
             }
@@ -410,7 +409,7 @@ public class SistemPersamaanLinear {
             int found = -1;
             double[] hasil = new double[27];
             for (int j=0;j<m.getCol();j++){
-                if(Math.abs(m.getElmt(i, j))>=5.00e-4){
+                if(Math.abs(m.getElmt(i, j))>=1.00e-20){
                     if(j==m.getCol()-1){
                         hasil[0] += m.getElmt(i, j);
                     }
@@ -434,7 +433,7 @@ public class SistemPersamaanLinear {
                 }
             }
             if(found==-1){
-                if(Math.abs(m.getElmt(i, m.getCol()-1))>=5.00e-4){
+                if(Math.abs(m.getElmt(i, m.getCol()-1))>=1.00e-20){
                     noSolution = true;
                 }
             }
