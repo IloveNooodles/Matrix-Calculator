@@ -2,9 +2,6 @@ package Utility;
 
 import java.io.*;
 import Matrix.*;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 
 public class IO {
 
@@ -56,9 +53,6 @@ public class IO {
   public static Matrix readMatrix(String s){
     Matrix a = new Matrix(readRow(s), readCol(s));
 
-    ScriptEngineManager manager = new ScriptEngineManager();
-    ScriptEngine engine = manager.getEngineByName("JavaScript");
-
     try {
       FileReader reader = new FileReader(String.format("../test/%s", s));
       BufferedReader bufferReader = new BufferedReader(reader);
@@ -68,12 +62,7 @@ public class IO {
       while((line = bufferReader.readLine()) != null){
         String[] lines = line.split(" ");
         for(int i = 0; i < lines.length; i++){
-          double temp = 0;
-          try {
-            temp = ((Number) engine.eval(lines[i])).doubleValue();
-          } catch (ScriptException e) {
-            e.printStackTrace();
-          }
+          double temp = Operation.eval(lines[i]);
           a.setElmt(count, i, temp);
         }
         count++;
