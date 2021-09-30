@@ -77,7 +77,6 @@ public class Matrix {
       }
 
       element = line.split(" ");
-      
       for(int j = 0; j < this.col; j++){
         double d = Operation.eval(element[j]);
         d = BigDecimal.valueOf(d).setScale(8, RoundingMode.HALF_UP).doubleValue();
