@@ -8,17 +8,17 @@ import Utility.IO;
 public class Interpolasi {
     public static Matrix masukkanInterpolasi(int n) {
         Matrix a = new Matrix(n, n + 1);
+        Matrix inputData = new Matrix(n, 2);
+        inputData.createMatrix();
 
-        Scanner sc = new Scanner(System.in);
         for (int i=0;i<n;i++){
-            double x = sc.nextDouble();
-            double y = sc.nextDouble();
+            double x = inputData.getElmt(i, 0);
+            double y = inputData.getElmt(i, 1);
             a.setElmt(i, n, y);
             for (int j=0;j<n;j++){
                 a.setElmt(i, j, Math.pow(x, j));
             }
         }
-        sc.close();
         return a;
     }
 
@@ -87,15 +87,13 @@ public class Interpolasi {
     
     //NOTE x ini sebagai input nilainya misal mau nyari f(2) berarti x nya 2
     public static void outputInterpolasi(Matrix a, double x) {
-      Scanner sc = new Scanner(System.in);
       Matrix inputData = new Matrix(a.getRow(), 1);
       inputData = getAnsInterpolasi(a);
       double y = 0;
       for (int k = 0; k < a.getRow(); k++) {
           y += inputData.getElmt(k, 0) * Math.pow(x, k);
       }
-      System.out.println(String.format("\nTaksiran nilai f(%.4f) ialah: %.4f", x, y));
-      sc.close();
+      System.out.println(String.format("Taksiran nilai f(%.4f) ialah: %.4f", x, y));
     }
 
     public static void fileInterpolasi(Matrix a, String namaFile) {

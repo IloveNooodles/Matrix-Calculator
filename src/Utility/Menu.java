@@ -8,6 +8,9 @@ import Aplikasi.*;
 public class Menu {
   private static Scanner sc = new Scanner(System.in);
 
+  private static InputStreamReader streamReader = new InputStreamReader(System.in);
+  private static BufferedReader bufferedReader = new BufferedReader(Menu.streamReader);
+
   private static Matrix m = new Matrix();
 
   private static String namaFile;
@@ -42,7 +45,7 @@ public class Menu {
     switch (i) {
       case 1:
         input();
-        q = sc.nextInt();
+        q = sc.nextByte();
         switch (q) {
           case 1:
             inputFileMatrix();
@@ -287,14 +290,14 @@ public class Menu {
   public static void inputRegresi(){
     System.out.println("");
     System.out.println("Akan dibuat RLB (Regresi Linear Berganda) dengan n buah persamaan dengan k peubah");
-    System.out.print("Masukan n:");
+    System.out.print("Masukan n: ");
     int n = sc.nextInt();
     System.out.print("Masukan k: ");
     int k = sc.nextInt();
     Menu.m = new Matrix(n, k + 1);
 
     System.out.println("Silahkan masukkan data:");
-    Menu.m = RLB.inputRLB(n, k);
+    Menu.m.createMatrix();
   }
 
   public static void inputTranspose() {
@@ -398,8 +401,16 @@ public class Menu {
     System.out.println("");
     System.out.print("Masukkan jumlah titik data yang ingin diprediksi: ");
     int n = sc.nextInt();
+
     while (n > 0) {
-      double x = sc.nextDouble();
+      System.out.println("");
+      double x = 0;
+      try {
+        System.out.print("Masukan nilai x: ");
+        x = Double.parseDouble(bufferedReader.readLine());
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
       Interpolasi.outputInterpolasi(Menu.m, x);
       n--;
     }
@@ -411,9 +422,13 @@ public class Menu {
     RLB.keluarkanRLB(Menu.m);
 
     System.out.println("");
+    System.out.println("Akan dicek prediksi nilai y dengan memasukan nilai x");
     System.out.print("Masukkan jumlah titik data yang ingin diprediksi: ");
-    int x = sc.nextInt();
-    RLB.outputRLB(Menu.m, x);
+    int n = sc.nextInt();
+    while (n > 0) {
+      RLB.outputRLB(Menu.m, Menu.m.getCol() - 1);
+      n--;
+    }
   }
 
   public static void inputFileMatrix() {

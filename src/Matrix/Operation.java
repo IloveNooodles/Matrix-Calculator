@@ -172,4 +172,12 @@ public class Operation {
       }
     }
   }
+
+  public static Double eval(String s) {
+    if (s.split("/").length == 1) {
+      return Double.parseDouble(s);
+    } else {
+      return Double.parseDouble(s.split("/")[0]) / Double.parseDouble(s.split("/")[1]);
+    }
+  }
 }

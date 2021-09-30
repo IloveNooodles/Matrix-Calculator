@@ -3,6 +3,9 @@ package Aplikasi;
 import Matrix.*;
 import Utility.*;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class RLB {
   public static Matrix convertRLBMatrix(Matrix m){
@@ -45,31 +48,6 @@ public class RLB {
 
   }
 
-  public static Matrix inputRLB(int n, int k) {
-    /* KAMUS */
-    Matrix m;
-    double elmt;
-
-    /* ALGORITMA */
-    Scanner sc = new Scanner(System.in);
-    m = new Matrix(n, k + 1);
-
-    for (int i = 0; i < n; i++) {
-      for (int j = 0; j < k + 1; j++) {
-        if (j == k) {
-          elmt = sc.nextDouble();
-          m.setElmt(i, j, elmt);
-        } else {
-          elmt = sc.nextDouble();
-          m.setElmt(i, j, elmt);
-        }
-      }
-    }
-
-    sc.close();
-    return m;
-  }
-
   public static void keluarkanRLB(Matrix m) {
     /* KAMUS */
     int i;
@@ -99,22 +77,25 @@ public class RLB {
     int i;
     double y;
     Matrix n;
-    Scanner sc = new Scanner(System.in);
+    InputStreamReader streamReader = new InputStreamReader(System.in);
+    BufferedReader bufferedReader = new BufferedReader(streamReader);
     /* ALGORITMA */
     
     n = new Matrix(m.getRow(), m.getCol());
     n = convertRLBMatrix(m);
-    
-    System.out.println("\nAkan dicek prediksi nilai y dengan memasukan nilai x");
 
     y = n.getElmt(0, n.getCol() - 1);
     for(i = 0; i < x; i++){
+      double b = 0;
       System.out.print(String.format("Masukan nilai x%d: ", i+1));
-      double b = sc.nextDouble();
+      try {
+        b = Double.parseDouble(bufferedReader.readLine());
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
       y += b*n.getElmt(i+1, n.getCol() - 1);
     }
     System.out.println(String.format("\nPrediksi nilai y dari regresi linear adalah : %,.4f", y));
-    sc.close();
   }
 
   public static void fileRLB(Matrix m, String namaFile) {
