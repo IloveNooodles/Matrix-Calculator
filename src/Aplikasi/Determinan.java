@@ -1,6 +1,7 @@
 package Aplikasi;
 
 import java.lang.Math;
+import java.util.Scanner;
 
 import Matrix.Matrix;
 import Matrix.Operation;
@@ -59,7 +60,7 @@ public class Determinan {
             }
         }
 
-        return hasil;
+        return Operation.setPrecisionValue(hasil, 4);
     }
 
     public static void displayEkspansiKofaktor(Matrix m) {
@@ -93,7 +94,7 @@ public class Determinan {
                 Operation.rowReduction(n, i, k, i);
             }
         }
-        return det;
+        return Operation.setPrecisionValue(det, 4);
     }
 
     public static void displayOBE(Matrix m) {
