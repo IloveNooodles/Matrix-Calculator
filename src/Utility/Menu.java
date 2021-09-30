@@ -49,6 +49,7 @@ public class Menu {
         switch (q) {
           case 1:
             inputFileMatrix();
+            
             break;
           case 2:
             inputInterpolasi();
