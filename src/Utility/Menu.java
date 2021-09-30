@@ -1,13 +1,11 @@
 package Utility;
 
 import java.io.*;
-import java.util.Scanner;
+
 import Matrix.*;
 import Aplikasi.*;
 
 public class Menu {
-  private static Scanner sc = new Scanner(System.in);
-
   private static InputStreamReader streamReader = new InputStreamReader(System.in);
   private static BufferedReader bufferedReader = new BufferedReader(Menu.streamReader);
 
@@ -16,12 +14,16 @@ public class Menu {
   private static String namaFile;
 
   public static void menuLoop(){
-    char Y;
+    char Y = '\0';
     do {
       mainMenu();
       System.out.println("");
       System.out.print("Apakah ingin melanjutkan? [Y/N]: ");
-      Y = sc.next().charAt(0);
+      try {
+        Y = bufferedReader.readLine().charAt(0);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     } while (Y == 'Y');
     exit();
   }
@@ -39,13 +41,21 @@ public class Menu {
     System.out.println("7. Keluar");
     System.out.print("Masukan pilihan: ");
 
-    int i, q;
+    int i = 0, q = 0;
 
-    i = sc.nextInt();
+    try {
+      i = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     switch (i) {
       case 1:
         input();
-        q = sc.nextInt();
+        try {
+          q = Integer.parseInt(bufferedReader.readLine());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         switch (q) {
           case 1:
             inputFileMatrix();
@@ -61,7 +71,11 @@ public class Menu {
         break;
       case 2:
         input();
-        q = sc.nextInt();
+        try {
+          q = Integer.parseInt(bufferedReader.readLine());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         switch (q) {
           case 1:
             inputFileMatrix();
@@ -76,7 +90,11 @@ public class Menu {
         break;
       case 3:
         input();
-        q = sc.nextInt();
+        try {
+          q = Integer.parseInt(bufferedReader.readLine());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         switch (q) {
           case 1:
             inputFileSqrtMatrix();
@@ -91,7 +109,11 @@ public class Menu {
         break;
       case 4:
         input();
-        q = sc.nextInt();
+        try {
+          q = Integer.parseInt(bufferedReader.readLine());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         switch (q) {
           case 1:
             inputFileSqrtMatrix();
@@ -106,7 +128,11 @@ public class Menu {
         break;
       case 5:
         input();
-        q = sc.nextInt();
+        try {
+          q = Integer.parseInt(bufferedReader.readLine());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         switch (q) {
           case 1:
             inputFileMatrix();
@@ -121,7 +147,11 @@ public class Menu {
         break;
       case 6:
         input();
-        q = sc.nextInt();
+        try {
+          q = Integer.parseInt(bufferedReader.readLine());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         switch (q) {
           case 1:
             inputFileMatrix();
@@ -144,7 +174,11 @@ public class Menu {
     switch (i) {
       case 1:
         output();
-        q = sc.nextInt();
+        try {
+          q = Integer.parseInt(bufferedReader.readLine());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         switch (q) {
           case 1:
             InterpolasiFile();
@@ -159,7 +193,11 @@ public class Menu {
         break;
       case 2:
         output();
-        q = sc.nextInt();
+        try {
+          q = Integer.parseInt(bufferedReader.readLine());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         switch (q) {
           case 1:
             RegresiFile();
@@ -174,7 +212,11 @@ public class Menu {
         break;
       case 3:
         output();
-        q = sc.nextInt();
+        try {
+          q = Integer.parseInt(bufferedReader.readLine());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         switch (q) {
           case 1:
             DeterminanFile();
@@ -189,7 +231,11 @@ public class Menu {
         break;
       case 4:
         output();
-        q = sc.nextInt();
+        try {
+          q = Integer.parseInt(bufferedReader.readLine());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         switch (q) {
           case 1:
             InverseFile();
@@ -204,7 +250,11 @@ public class Menu {
         break;
       case 5:
         output();
-        q = sc.nextInt();
+        try {
+          q = Integer.parseInt(bufferedReader.readLine());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         switch (q) {
           case 1:
             SPLFile();
@@ -219,7 +269,11 @@ public class Menu {
         break;
       case 6:
         output();
-        q = sc.nextInt();
+        try {
+          q = Integer.parseInt(bufferedReader.readLine());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         switch (q) {
           case 1:
             TransposeFile();
@@ -256,10 +310,23 @@ public class Menu {
   public static void inputMatrix(){
     System.out.println("");
     System.out.println("Akan dibuat matrix berukuran m x n");
+
     System.out.print("Masukan m: ");
-    int jumlahBaris = sc.nextInt();
+    int jumlahBaris = 0;
+    try {
+      Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
     System.out.print("Masukan n: ");
-    int jumlahKolom = sc.nextInt();
+    int jumlahKolom = 0;
+    try {
+      Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
     Menu.m = new Matrix(jumlahBaris, jumlahKolom);
 
     System.out.println("Silahkan masukan setiap element matrix: ");
@@ -269,8 +336,14 @@ public class Menu {
   public static void inputSqrtMatrix(){
     System.out.println("");
     System.out.println("Akan dibuat matrix berukuran n x n");
-    System.out.print("Masukan n: "); 
-    int n = sc.nextInt();
+    System.out.print("Masukan n: ");
+
+    int n = 0;
+    try {
+      n = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     Menu.m = new Matrix(n, n);
 
     System.out.println("Silahkan masukan setiap element matrix: ");
@@ -281,7 +354,13 @@ public class Menu {
     System.out.println("");
     System.out.println("Akan dibuat interpolasi dengan pasangan sebanyak n buah");
     System.out.print("Masukan n: ");
-    int n = sc.nextInt();
+    int n = 0;
+
+    try {
+      n = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     Menu.m = new Matrix(n, n + 1);
 
     System.out.println("Silahkan masukan setiap pasangan: ");
@@ -292,9 +371,20 @@ public class Menu {
     System.out.println("");
     System.out.println("Akan dibuat RLB (Regresi Linear Berganda) dengan n buah persamaan dengan k peubah");
     System.out.print("Masukan n: ");
-    int n = sc.nextInt();
+
+    int n = 0;
+    try {
+      n = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     System.out.print("Masukan k: ");
-    int k = sc.nextInt();
+    int k = 0;
+    try {
+      k = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     Menu.m = new Matrix(n, k + 1);
     System.out.println("Silahkan masukkan data:");
     Menu.m.createMatrix();
@@ -304,9 +394,19 @@ public class Menu {
     System.out.println("");
     System.out.println("Akan dibuat transpose matriks m x n");
     System.out.print("Masukan m: ");
-    int m = sc.nextInt();
+    int m = 0;
+    try {
+      m = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     System.out.print("Masukan n: ");
-    int n = sc.nextInt();
+    int n = 0;
+    try {
+      n = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     Menu.m = new Matrix(m, n);
 
     System.out.println("Silahkan masukan setiap element matrix: ");
@@ -321,7 +421,12 @@ public class Menu {
     System.out.println("3. Metode Matriks Balikan");
     System.out.println("4. Kaidah Cramer");
     System.out.print("Masukan pilihan: ");
-    int i = sc.nextInt();
+    int i = 0;
+    try {
+      i = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     switch (i) {
       case 1:
         SistemPersamaanLinear.SPLGauss(Menu.m);
@@ -348,7 +453,12 @@ public class Menu {
     System.out.println("2. Metode Ekspansi Kofaktor");
     System.out.println("3. Metode Sarrus");
     System.out.print("Masukan pilihan: ");
-    int i = sc.nextInt();
+    int i = 0;
+    try {
+      i = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     switch (i) {
       case 1:
@@ -372,7 +482,12 @@ public class Menu {
     System.out.println("1. Metode Eliminasi Gauss-Jordan");
     System.out.println("2. Metode Adjoint");
     System.out.print("Masukan pilihan: ");
-    int i = sc.nextInt();
+    int i = 0;
+    try {
+      i = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     switch (i) {
       case 1:
@@ -400,7 +515,12 @@ public class Menu {
 
     System.out.println("");
     System.out.print("Masukkan jumlah titik data yang ingin diprediksi: ");
-    int n = sc.nextInt();
+    int n = 0;
+    try {
+      n = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     while (n > 0) {
       System.out.println("");
@@ -424,7 +544,12 @@ public class Menu {
     System.out.println("");
     System.out.println("Akan dicek prediksi nilai y dengan memasukan nilai x");
     System.out.print("Masukkan jumlah test case yang ingin diprediksi: ");
-    int n = sc.nextInt();
+    int n = 0;
+    try {
+      n = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     while (n > 0) {
       RLB.outputRLB(Menu.m, Menu.m.getCol() - 1);
       n--;
@@ -438,7 +563,12 @@ public class Menu {
     
     File[] listFiles = IO.getListDir();
     System.out.print("Masukan pilihan: ");
-    int q = sc.nextInt();
+    int q = 0;
+    try {
+      q = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     Menu.m = new Matrix();
     Menu.m = IO.readMatrix(listFiles[q - 1].getName());
@@ -451,7 +581,12 @@ public class Menu {
     
     File[] listFiles = IO.getListDir();
     System.out.print("Masukan pilihan: ");
-    int q = sc.nextInt();
+    int q = 0;
+    try {
+      q = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     Menu.m = new Matrix();
     Menu.m = IO.readMatrix(listFiles[q - 1].getName());
@@ -491,7 +626,13 @@ public class Menu {
     System.out.println("2. Metode Ekspansi Kofaktor");
     System.out.println("3. Metode Sarrus");
     System.out.print("Masukan pilihan: ");
-    int i = sc.nextInt();
+    
+    int i = 0;
+    try {
+      i = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     switch (i) {
       case 1:
@@ -516,7 +657,13 @@ public class Menu {
     System.out.println("1. Metode Eliminasi Gauss-Jordan");
     System.out.println("2. Metode Adjoint");
     System.out.print("Masukan pilihan: ");
-    int i = sc.nextInt();
+
+    int i = 0;
+    try {
+      i = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     switch (i) {
       case 1:
@@ -540,7 +687,12 @@ public class Menu {
     System.out.println("3. Metode Matriks Balikan");
     System.out.println("4. Kaidah Cramer");
     System.out.print("Masukan pilihan: ");
-    int i = sc.nextInt();
+    int i = 0;
+    try {
+      i = Integer.parseInt(bufferedReader.readLine());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     switch (i) {
       case 1:
         SistemPersamaanLinear.FileSPLGauss(Menu.m, Menu.namaFile);
@@ -567,7 +719,6 @@ public class Menu {
 
   public static void exit(){
     System.out.println("\nTerima kasih telah menggunakan matrix calculator!");
-    sc.close();
     System.exit(0);
   }
 }
