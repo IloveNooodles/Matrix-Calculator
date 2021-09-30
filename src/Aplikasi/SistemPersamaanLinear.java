@@ -133,6 +133,8 @@ public class SistemPersamaanLinear {
                     System.out.println("x" + i + " = " + String.format("%.4f", a.getElmt(i, 0)));
                 }
             }
+        }else{
+          System.out.println("Jumlah persamaan tidak sama dengan Jumlah variabel!");
         }
     }
 
@@ -154,6 +156,9 @@ public class SistemPersamaanLinear {
                 }
                 IO.writeFileString(namaFile, tempString);
             }
+        }else{
+          IO.writeFileString(namaFile, "Jumlah persamaan tidak sama dengan Jumlah variabel!");
+          return;
         }
     }
 
