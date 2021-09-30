@@ -477,6 +477,8 @@ public class Menu {
   public static void InterpolasiFile() {
     outputFile();
 
+    Menu.m = Interpolasi.MatrixToMatrixInterpolasi(m);
+
     Interpolasi.fileInterpolasi(Menu.m, Menu.namaFile);
   }
 
