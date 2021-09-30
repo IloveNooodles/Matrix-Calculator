@@ -7,7 +7,7 @@ import Utility.IO;
 
 public class Interpolasi {
     public static Matrix masukkanInterpolasi(int n) {
-        Matrix a = new Matrix(n, n+1);
+        Matrix a = new Matrix(n, n + 1);
 
         Scanner sc = new Scanner(System.in);
         for (int i=0;i<n;i++){
@@ -41,7 +41,7 @@ public class Interpolasi {
         b = SistemPersamaanLinear.MatrixGaussJordan(a);
         System.out.println("\nPolinom interpolasi yang melewati titik-titik tersebut ialah: ");
         System.out.print("f(x) = ");
-        for (int k=0;k<n-1;k++){
+        for (int k=0;k < b.getRow();k++){
             if (b.getElmt(k, n - 1) == 0) {
                 continue;
             }
@@ -94,18 +94,18 @@ public class Interpolasi {
       for (int k = 0; k < a.getRow(); k++) {
           y += inputData.getElmt(k, 0) * Math.pow(x, k);
       }
-      System.out.println(String.format("\nTaksiran nilai f(%f) ialah: %f", x, y));
+      System.out.println(String.format("\nTaksiran nilai f(%.4f) ialah: %.4f", x, y));
       sc.close();
     }
 
-    public static void fileInterpolasi(Matrix a, int x, String namaFile) {
+    public static void fileInterpolasi(Matrix a, String namaFile) {
         int n = a.getCol();
         Matrix b = new Matrix(a.getRow(), a.getCol());
         b = SistemPersamaanLinear.MatrixGaussJordan(a);
 
         String tempString = "";
-        tempString += "y = ";
-        for (int k=0;k<n-1;k++){
+        tempString += "f(x) = ";
+        for (int k=0;k < b.getRow();k++){
             if (b.getElmt(k, n - 1) == 0) {
                 continue;
             }
@@ -120,18 +120,6 @@ public class Interpolasi {
             }
         }
         tempString += "\n";
-
-        Matrix inputData = new Matrix(1, b.getRow());
-
-        while (x > 0) {
-            double y = 0;
-            inputData.createMatrix();
-            for (int k = 0; k < n - 1; k++) {
-                y += b.getElmt(k, n - 1) * Math.pow(inputData.getElmt(0, k), k);
-            }
-            tempString += String.format("%.4f", y) + "\n";
-            x--;
-        }
 
         IO.writeFileString(namaFile, tempString);
     }

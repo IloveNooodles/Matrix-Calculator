@@ -299,10 +299,12 @@ public class Menu {
 
   public static void inputTranspose() {
     System.out.println("");
-    System.out.println("Akan dibuat transpose matriks n x n");
+    System.out.println("Akan dibuat transpose matriks m x n");
+    System.out.print("Masukan m: ");
+    int m = sc.nextInt();
     System.out.print("Masukan n: ");
     int n = sc.nextInt();
-    Menu.m = new Matrix(n, n);
+    Menu.m = new Matrix(m, n);
 
     System.out.println("Silahkan masukan setiap element matrix: ");
     Menu.m.createMatrix();
@@ -392,10 +394,15 @@ public class Menu {
     System.out.println("");
     System.out.println("Hasil interpolasi data tersebut adalah: ");
     Interpolasi.keluarkanInterpolasi(Menu.m);
+
     System.out.println("");
     System.out.print("Masukkan jumlah titik data yang ingin diprediksi: ");
-    int x = sc.nextInt();
-    Interpolasi.outputInterpolasi(Menu.m, x);
+    int n = sc.nextInt();
+    while (n > 0) {
+      double x = sc.nextDouble();
+      Interpolasi.outputInterpolasi(Menu.m, x);
+      n--;
+    }
   }
 
   public static void RegresiKeyboard() {
@@ -453,20 +460,14 @@ public class Menu {
 
   public static void InterpolasiFile() {
     outputFile();
-    System.out.println("");
-    System.out.print("Masukkan jumlah titik data yang ingin diprediksi: ");
-    int x = sc.nextInt();
 
-    Interpolasi.fileInterpolasi(Menu.m, x, Menu.namaFile);
+    Interpolasi.fileInterpolasi(Menu.m, Menu.namaFile);
   }
 
   public static void RegresiFile() {
     outputFile();
-    System.out.println("");
-    System.out.print("Masukkan jumlah titik data yang ingin diprediksi: ");
-    int x = sc.nextInt();
 
-    RLB.fileRLB(Menu.m, x, Menu.namaFile);
+    RLB.fileRLB(Menu.m, Menu.namaFile);
   }
 
   public static void DeterminanFile() {

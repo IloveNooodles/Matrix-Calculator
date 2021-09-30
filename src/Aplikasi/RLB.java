@@ -117,11 +117,10 @@ public class RLB {
     sc.close();
   }
 
-  public static void fileRLB(Matrix m, int x, String namaFile) {
+  public static void fileRLB(Matrix m, String namaFile) {
     /* KAMUS */
     int i;
-    double y;
-    Matrix inputData, n;
+    Matrix n;
     String tempString;
 
     /* ALGORITMA */
@@ -143,18 +142,6 @@ public class RLB {
       }
     }
     tempString += "\n";
-
-    inputData = new Matrix(1, n.getRow());
-
-    while (x > 0) {
-      inputData.createMatrix();
-      y = n.getElmt(0, n.getCol() - 1);
-      for (i = 1; i < n.getRow();i++) {
-        y += inputData.getElmt(0, i - 1) * n.getElmt(i, n.getCol() - 1);
-      }
-      tempString += String.format("%.4f", y) + "\n";
-      x--;
-    }
 
     IO.writeFileString(namaFile, tempString);
   }
