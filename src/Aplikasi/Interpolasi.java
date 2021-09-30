@@ -57,7 +57,7 @@ public class Interpolasi {
         }
     }
 
-    public static void keluarkanInterpolasiCrammer(Matrix a){
+    /*public static void keluarkanInterpolasiCrammer(Matrix a){
       Matrix b = new Matrix();
       b = Crammer.matrixCrammer(a);
       for(int i = 0; i < b.getRow(); i++){
@@ -70,19 +70,19 @@ public class Interpolasi {
           System.out.print(String.format(b.getElmt(i-1, 0) == 0 ? "" : " + " + "(%.4f)", b.getElmt(i, 0)) + "x^" + i);
         }
       }
-    }
+    }*/
 
     //NOTE ini buat ngedapetin array answernya
     public static Matrix getAnsInterpolasi(Matrix a){
       int n = a.getCol();
       Matrix b = new Matrix(a.getRow(), a.getCol());
       Matrix ans = new Matrix(a.getRow(),1);
-      // b = SistemPersamaanLinear.MatrixGaussJordan(a);
-      b = Crammer.matrixCrammer(a);
-      // for (int i=0;i<ans.getRow();i++){
-      //       ans.setElmt(i, 0, b.getElmt(i, n-1));
-      // }
-      return b;
+      b = SistemPersamaanLinear.MatrixGaussJordan(a);
+      // b = Crammer.matrixCrammer(a);
+      for (int i=0;i<ans.getRow();i++){
+          ans.setElmt(i, 0, b.getElmt(i, n-1));
+      }
+      return ans;
     }
     
     //NOTE x ini sebagai input nilainya misal mau nyari f(2) berarti x nya 2
