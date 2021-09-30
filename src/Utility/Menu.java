@@ -296,7 +296,6 @@ public class Menu {
     System.out.print("Masukan k: ");
     int k = sc.nextInt();
     Menu.m = new Matrix(n, k + 1);
-
     System.out.println("Silahkan masukkan data:");
     Menu.m.createMatrix();
   }
@@ -484,7 +483,6 @@ public class Menu {
 
   public static void RegresiFile() {
     outputFile();
-
     RLB.fileRLB(Menu.m, Menu.namaFile);
   }
 
