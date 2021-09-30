@@ -47,10 +47,10 @@ public class Interpolasi {
                 System.out.print(String.format("%.4f", b.getElmt(k,n-1)));
             }
             else if(k==1){
-                System.out.print(String.format(b.getElmt(k - 1, n - 1) == 0 ? "" : " + " + "(%.4f)", b.getElmt(k, n-1)) + "x");
+                System.out.print(String.format(" + " + "(%.4f)", b.getElmt(k, n-1)) + "x");
             }
             else {
-                System.out.print(String.format(b.getElmt(k - 1, n - 1) == 0 ? "" : " + " + "(%.4f)", b.getElmt(k, n-1)) + "x^" + k);
+                System.out.print(String.format(" + " + "(%.4f)", b.getElmt(k, n-1)) + "x^" + k);
             }
         }
     }
@@ -109,10 +109,10 @@ public class Interpolasi {
                 tempString += String.format("%.4f", b.getElmt(k,n-1));
             }
             else if(k==1){
-                tempString += String.format(b.getElmt(k - 1, n - 1) == 0 ? "" : " + " + "(%.4f)", b.getElmt(k, n-1)) + "x";
+                tempString += String.format(" + " + "(%.4f)", b.getElmt(k, n-1)) + "x";
             }
             else {
-                tempString += String.format(b.getElmt(k - 1, n - 1) == 0 ? "" : " + " + "(%.4f)", b.getElmt(k, n-1)) + "x^" + k;
+                tempString += String.format(" + " + "(%.4f)", b.getElmt(k, n-1)) + "x^" + k;
             }
         }
         tempString += "\n";
