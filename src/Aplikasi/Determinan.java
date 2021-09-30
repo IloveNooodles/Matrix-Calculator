@@ -40,7 +40,7 @@ public class Determinan {
             hasil = -1 * ekspansiKofaktor(mHasil);
         }
 
-        return hasil;
+        return Operation.setPrecisionValue(hasil, 4);
     }
 
     public static double ekspansiKofaktor(Matrix m) {
