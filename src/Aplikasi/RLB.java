@@ -118,7 +118,7 @@ public class RLB {
         tempString += String.format("%.4f", n.getElmt(i, n.getCol() - 1));
       }
       else {
-        tempString += String.format(n.getElmt(i - 1, n.getCol() - 1) == 0 ? "" : " + " + "(%.4f)", n.getElmt(i, n.getCol() - 1)) + "x" + i;
+        tempString += String.format(" + " + "(%.4f)", n.getElmt(i, n.getCol() - 1)) + "x" + i;
       }
     }
     tempString += "\n";
