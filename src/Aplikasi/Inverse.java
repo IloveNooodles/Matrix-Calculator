@@ -33,6 +33,7 @@ public class Inverse {
         for (int i=0;i<a.getRow();i++){
             Operation.rowTimesK(b, 1/det, i);
         }
+        b.setPrecision(4);
         return b;
       }
     }
@@ -90,9 +91,8 @@ public class Inverse {
           }
           Operation.rowReduction(mAug, j, i, j);
         }
-
         Operation.rowTimesK(mAug, 1 / mAug.getElmt(j, j), j);
-
+        mAug.setPrecision(4);
       }
 
       for (i = 0; i < a.getRow(); i++) {
@@ -100,7 +100,6 @@ public class Inverse {
           mHasil.setElmt(i, j, mAug.getElmt(i, j + a.getCol()));
         }
       }
-
       return mHasil;
     }
 
