@@ -1,7 +1,5 @@
 package Aplikasi;
 
-import java.util.Scanner;
-
 import Matrix.Matrix;
 import Utility.IO;
 

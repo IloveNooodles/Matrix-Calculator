@@ -2,9 +2,6 @@ package Matrix;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import java.io.*;
 
 public class Matrix {
@@ -64,10 +61,7 @@ public class Matrix {
 
   //OPERASI
 
-  public void createMatrix(){
-    ScriptEngineManager manager = new ScriptEngineManager();
-    ScriptEngine engine = manager.getEngineByName("JavaScript");
-    
+  public void createMatrix(){  
     InputStreamReader streamReader = new InputStreamReader(System.in);
     BufferedReader bufferedReader = new BufferedReader(streamReader);
 
@@ -85,12 +79,7 @@ public class Matrix {
       element = line.split(" ");
       
       for(int j = 0; j < this.col; j++){
-        double d = 0;
-        try {
-          d = ((Number) engine.eval(element[j])).doubleValue();
-        } catch (ScriptException e) {
-          e.printStackTrace();
-        }
+        double d = Operation.eval(element[j]);
         d = BigDecimal.valueOf(d).setScale(8, RoundingMode.HALF_UP).doubleValue();
         this.mtxr[i][j] = d;
       }
