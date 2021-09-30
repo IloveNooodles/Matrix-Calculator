@@ -45,7 +45,7 @@ public class Menu {
     switch (i) {
       case 1:
         input();
-        q = sc.nextByte();
+        q = sc.nextInt();
         switch (q) {
           case 1:
             inputFileMatrix();
