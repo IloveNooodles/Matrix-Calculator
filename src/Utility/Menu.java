@@ -314,7 +314,7 @@ public class Menu {
     System.out.print("Masukan m: ");
     int jumlahBaris = 0;
     try {
-      Integer.parseInt(bufferedReader.readLine());
+      jumlahBaris = Integer.parseInt(bufferedReader.readLine());
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -322,11 +322,10 @@ public class Menu {
     System.out.print("Masukan n: ");
     int jumlahKolom = 0;
     try {
-      Integer.parseInt(bufferedReader.readLine());
+      jumlahKolom = Integer.parseInt(bufferedReader.readLine());
     } catch (IOException e) {
       e.printStackTrace();
     }
-
     Menu.m = new Matrix(jumlahBaris, jumlahKolom);
 
     System.out.println("Silahkan masukan setiap element matrix: ");

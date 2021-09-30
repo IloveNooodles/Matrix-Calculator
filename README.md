@@ -62,7 +62,11 @@ Tugas Besar 1 Aljabar Linear dan Geometri IF20 is a project to build matrice cal
 
 ## How To Use?
 
-1. Clone folder with `git clone https://github.com/IloveNooodles/Algeo01-20029.git`
+1. Clone folder with `git clone https://github.com/IloveNooodles/Algeo01-20029.git` or download the zip file from the github
 1. Go to the folder `cd Algeo01-20029`
 1. Go to bin folder `cd bin`
 1. Run matrix calculator using `java Main` command
+
+## Note
+
+Make sure you inputed the matrices right, because we use buffered reader so the number of element in the row or column must be precise

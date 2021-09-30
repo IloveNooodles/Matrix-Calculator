@@ -62,8 +62,8 @@ public class Matrix {
   //OPERASI
 
   public void createMatrix(){  
-    InputStreamReader streamReader = new InputStreamReader(System.in);
-    BufferedReader bufferedReader = new BufferedReader(streamReader);
+    InputStreamReader inputan = new InputStreamReader(System.in);
+    BufferedReader readInput = new BufferedReader(inputan);
 
     for(int i = 0; i < this.row; i++){
 
@@ -71,11 +71,10 @@ public class Matrix {
       String line = new String();
 
       try {
-        line = bufferedReader.readLine();
+        line = readInput.readLine();
       } catch (IOException e) {
         e.printStackTrace();
       }
-
       element = line.split(" ");
       for(int j = 0; j < this.col; j++){
         double d = Operation.eval(element[j]);
