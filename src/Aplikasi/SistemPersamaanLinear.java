@@ -194,6 +194,7 @@ public class SistemPersamaanLinear {
             }
         }
         n.setPrecision(q);
+        input.close();
         return n;
     }
     public static void SPLGauss(Matrix m){
