@@ -73,7 +73,7 @@ Tugas Besar 1 Aljabar Linear dan Geometri IF20 is a project to build matrice cal
 1. test folder is used to store input and output txt file
 1. you can also run the jar using `java -jar <jar-file.jar>`
 
-### Using Jar Separately (not from source code)
+### Using Jar Separately (Release ver)
 
 1. Download the jar file
 1. To use the jar file, you must make siblings folder and one folder name test
